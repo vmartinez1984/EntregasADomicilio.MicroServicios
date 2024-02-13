@@ -2,44 +2,30 @@
 
 ## Diagrama del sistema
 ```mermaid
-flowchart LR
-    subgraph Repositorios
-        Db[(Sql)]
-        DbMysql[(Mysql)] 
-        DbMongo[(MongoDb)]
-    end
+    Db[(Sql)]
+    DbMysql[(Mysql)] 
+    DbMongo[(MongoDb)]   
 
-    subgraph Web page
-        C[Api web datos] -->DbMysql
-        A[Api web platillos] -->Db
-        B[Api web usuarios] --> Db
-        D[Api web pedidios] --> Db
-    end
-    
+    C[Api web datos] -->DbMysql
+    A[Api web platillos] -->Db
+    B[Api web usuarios] --> Db
+    D[Api web pedidios] --> Db
 
+    H[Api cocina pedidos] -->Db
+    I[Api cocina clientes] -->Db
+    J[Api cocina login] -->Db
+    K[Api cocina platillos] -->Db
+    L[Api cocina repartidor Ubicacion] --> DbMongo
 
-    subgraph Cocina
-        H[Api pedidos] -->Db
-        I[Api clientes] -->Db
-        J[Api login] -->Db
-        K[Api platillos] -->Db
-        L[Api repartidor Ubicacion] --> DbMongo
-    end
+    G[Api repartidor Ubicacion] --> DbMongo
+    E[Api repartidor pedidos] --> Db
+    F[Api repartidor login] --> Db        
 
-    subgraph repartidor
-        G[Api repartidor Ubicacion] --> DbMongo
-        E[Api repartidor pedidos] --> Db
-        F[Api repartidor login] --> Db
-        H1[Api admin usuarios] --> Db
-    end
-
-    subgraph Admin
-        M[Api web datos] --> DbMysql
-        N[Api clientes] --> Db
-        O[Api pedidos] --> Db
-        P[Api platillos] --> Db
-        Q[Api repartidor Ubicacion] --> DbMongo
-        R[Api usuarios] --> Db
-        S[Api login] --> Db
-    end
+    M[Api Admin web datos] --> DbMysql
+    N[Api Admin clientes] --> Db
+    O[Api Admin pedidos] --> Db
+    P[Api Admin platillos] --> Db
+    Q[Api Admin repartidor Ubicacion] --> DbMongo
+    R[Api Admin usuarios] --> Db
+    S[Api Admin login] --> Db
 ```
