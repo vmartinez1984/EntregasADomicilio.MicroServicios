@@ -30,7 +30,7 @@ flowchart LR
         G[Api repartidor Ubicacion] --> DbMongo
         E[Api repartidor pedidos] --> Db
         F[Api repartidor login] --> Db
-        H[Api admin usuarios] --> Db
+        H1[Api admin usuarios] --> Db
     end
 
     subgraph Admin
