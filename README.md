@@ -2,7 +2,7 @@
 
 ## Diagrama del sistema
 ```mermaid
-flowchart TD
+flowchart LR
     subgraph Repositorios
         Db[(Sql)]
         DbMysql[(Mysql)] 
