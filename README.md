@@ -2,6 +2,7 @@
 
 ## Diagrama del sistema
 ```mermaid
+flowchart LR
     Db[(Sql)]
     DbMysql[(Mysql)] 
     DbMongo[(MongoDb)]   
