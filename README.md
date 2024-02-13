@@ -1,7 +1,7 @@
 # EntregasADomicilio MicroServicios
 
 ## Diagrama del sistema
-```Mermaid
+```mermaid
 flowchart TD
     A[Api platillos] -->Db[(Sql)]
     B[Api usuarios] --> Db
