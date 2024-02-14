@@ -8,14 +8,13 @@ namespace EntregasADomicilio.Web.Repositorios.Sql.Contexts
     {
         private readonly string _connectionString;
 
-
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Platillo> Platillo { get; set; }
 
 
         public AppDbContext()
         {
-            _connectionString = "Data Source=192.168.1.86;Initial Catalog=EntregasADomicilio; Persist Security Info=True;User ID=sa;Password=Macross#2012; TrustServerCertificate=True;";
+            _connectionString = "Data Source=192.168.1.86; Initial Catalog=EntregasADomicilio; Persist Security Info=True; User ID=sa; Password=Macross#2012; TrustServerCertificate=True;";
         }
 
         public AppDbContext(IConfiguration configuration)

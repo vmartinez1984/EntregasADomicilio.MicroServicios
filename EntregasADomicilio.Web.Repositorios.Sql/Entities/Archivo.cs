@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntregasADomicilio.Web.Repositorios.Sql.Entities
 {
     public class Archivo
     {
+        [Key]
         public int Id { get; set; }
 
         public Guid Guid { get; set; }

@@ -1,4 +1,4 @@
-namespace EntregasADomicilio.Web.Usuarios
+namespace EntregasADomicilio.Admin.Pedidos.Api
 {
     public class WeatherForecast
     {

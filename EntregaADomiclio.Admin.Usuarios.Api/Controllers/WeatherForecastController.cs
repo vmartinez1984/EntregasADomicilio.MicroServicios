@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace EntregasADomicilio.Web.Usuarios.Controllers
+namespace EntregaADomiclio.Admin.Usuarios.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

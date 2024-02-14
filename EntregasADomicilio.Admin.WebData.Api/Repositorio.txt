@@ -1,0 +1,11 @@
+{
+  "Id": 0,
+  "Nombre": "Lucky Sushi",
+  "CalleYNumero": "string",
+  "Colonia": "string",
+  "CodigoPostal": "string",
+  "Estado": "string",
+  "Latitud": "string",
+  "Longitud": "string",
+  "Slogan": "string"
+}

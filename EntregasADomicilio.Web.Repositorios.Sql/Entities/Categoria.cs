@@ -5,6 +5,7 @@ namespace EntregasADomicilio.Web.Repositorios.Sql.Entities
 {
     public class Categoria
     {
+        [Key]
         public int Id { get; set; }
 
         public Guid Guid { get; set; }

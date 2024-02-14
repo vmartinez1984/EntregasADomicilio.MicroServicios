@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntregasADomicilio.Admin.WebData.Core\EntregasADomicilio.Admin.WebData.Core.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Admin.WebData.Repository.Sql\EntregasADomicilio.Admin.WebData.Repositorio.Sql.csproj" />
+  </ItemGroup>
+
+</Project>
