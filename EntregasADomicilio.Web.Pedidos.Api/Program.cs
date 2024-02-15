@@ -47,11 +47,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("Administracion", policy =>
-    {
-        policy.RequireClaim("Role", "Administracion");
-    });
+{    
     options.AddPolicy("Cliente", policy =>
     {
         policy.RequireClaim("Role", "Cliente");

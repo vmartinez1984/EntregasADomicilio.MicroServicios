@@ -1,4 +1,4 @@
-﻿using EntregasADomicilio.Admin.WebData.Core.Interfaces;
+﻿using EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Data;
 
 namespace EntregasADomicilio.Admin.WebData.BusinessLayer.Bl
 {

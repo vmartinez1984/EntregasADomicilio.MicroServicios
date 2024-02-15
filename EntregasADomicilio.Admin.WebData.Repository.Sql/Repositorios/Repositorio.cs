@@ -1,5 +1,5 @@
 ﻿using EntregasADomicilio.Admin.WebData.Core.Entities;
-using EntregasADomicilio.Admin.WebData.Core.Interfaces;
+using EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Data;
 using Newtonsoft.Json;
 using System.IO;
 using System.Threading.Tasks;

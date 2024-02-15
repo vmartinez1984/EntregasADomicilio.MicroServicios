@@ -1,22 +1,29 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using EntregasADomicilio.Admin.WebData.Core.Dtos.Web;
+using EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Usuarios;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntregasADomicilio.Web.Usuarios.Api.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
     public class ClientesController : ControllerBase
     {
-        /*
+        private readonly IUnitOfWork _unitOfWork;
+
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="unitOfWork"></param>
-        public ClientesController(IUnitOfWorkVentas unitOfWork) : base(unitOfWork)
+        public ClientesController(IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -28,13 +35,13 @@ namespace EntregasADomicilio.Web.Usuarios.Api.Controllers
         [ProducesResponseType(typeof(IdDto), StatusCodes.Status202Accepted)]
         [Produces("application/json")]
         [AllowAnonymous]
-        public async Task<IActionResult> Post([FromBody] ClienteVentaDtoIn clienteDtoIn)
+        public async Task<IActionResult> Post([FromBody] ClienteDtoIn clienteDtoIn)
         {
             int id;
 
             id = await _unitOfWork.Cliente.AgregarAsync(clienteDtoIn);
 
-            return Accepted(new { Id = id });
+            return Accepted(new IdDto { Guid = clienteDtoIn.Guid, Id = id });
         }
 
         /// <summary>
@@ -60,6 +67,34 @@ namespace EntregasADomicilio.Web.Usuarios.Api.Controllers
         }
 
         /// <summary>
+        /// Obtener cliente
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(ClienteDto), StatusCodes.Status200OK)]
+        [Produces("application/json")]
+        public async Task<IActionResult> ObtenerCliente()
+        {
+            ClienteDto cliente;
+
+            cliente = await _unitOfWork.Cliente.ObtenerPorIdAsync(ObtenerClienteId());
+
+            return Ok(cliente);
+        }
+
+        private int ObtenerClienteId()
+        {
+            int clienteId;
+
+            var claim = this.HttpContext.User.Claims.First(x => x.Type == "ClienteId");
+            clienteId = int.Parse(claim.Value);
+
+            return clienteId;
+        }
+
+        /*
+
+        /// <summary>
         /// Actualizar datos del cliente/ no implementado
         /// </summary>
         /// <param name="cliente"></param>
@@ -77,21 +112,6 @@ namespace EntregasADomicilio.Web.Usuarios.Api.Controllers
             return Accepted();
         }
 
-        /// <summary>
-        /// Obtener cliente
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [ProducesResponseType(typeof(ClienteDto), StatusCodes.Status200OK)]
-        [Produces("application/json")]
-        public async Task<IActionResult> ObtenerCliente()
-        {
-            ClienteVentaDto cliente;
-
-            cliente = await _unitOfWork.Cliente.ObtenerPorIdAsync(ObtenerClienteId());
-
-            return Ok(cliente);
-        }
 
         /// <summary>
         /// Agregar direccion del cliente

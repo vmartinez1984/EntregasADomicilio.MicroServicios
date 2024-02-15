@@ -1,8 +1,7 @@
-﻿using EntregasADomicilio.Admin.WebData.Core.Dtos.Admin;
-using EntregasADomicilio.Admin.WebData.Core.Entities;
+﻿using EntregasADomicilio.Admin.WebData.Core.Entities;
 using System.Threading.Tasks;
 
-namespace EntregasADomicilio.Admin.WebData.Core.Interfaces
+namespace EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Data
 {
     public interface IRepositorio
     {

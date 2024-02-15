@@ -4,11 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.22" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntregasADomicilio.Web.Usuarios.BusinessLayer\EntregasADomicilio.Web.Usuarios.BusinessLayer.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Usuarios.Repositorio.Sql\EntregasADomicilio.Web.Usuarios.Repositorio.Sql.csproj" />
   </ItemGroup>
 
 </Project>

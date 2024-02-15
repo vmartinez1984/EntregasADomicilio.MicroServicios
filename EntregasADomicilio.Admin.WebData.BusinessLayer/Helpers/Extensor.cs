@@ -1,5 +1,5 @@
 ﻿using EntregasADomicilio.Admin.WebData.BusinessLayer.Bl;
-using EntregasADomicilio.Admin.WebData.Core.Interfaces;
+using EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Data;
 using EntregasADomicilio.Admin.WebData.Repositorio.Sql.Repositorios;
 using Microsoft.Extensions.DependencyInjection;
 

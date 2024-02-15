@@ -54,6 +54,9 @@ namespace EntregasADomicilio.Admin.WebData.Core.Dtos.Web
 
     public class ClienteDtoIn
     {
+        [Required]
+        public Guid Guid { get; set; }
+
         [MaxLength(50)]
         public string Nombre { get; set; }
 
@@ -74,6 +77,6 @@ namespace EntregasADomicilio.Admin.WebData.Core.Dtos.Web
         [DataType(DataType.Date)]
         public DateTime FechaDeNacimiento { get; set; }
 
-        public DireccionVentaDtoIn Direccion { get; set; }
+        public DireccionDtoIn Direccion { get; set; }
     }
 }

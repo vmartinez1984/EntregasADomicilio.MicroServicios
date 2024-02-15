@@ -1,6 +1,6 @@
 ﻿using EntregasADomicilio.Admin.WebData.Core.Dtos.Admin;
 using EntregasADomicilio.Admin.WebData.Core.Entities;
-using EntregasADomicilio.Admin.WebData.Core.Interfaces;
+using EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Data;
 
 namespace EntregasADomicilio.Admin.WebData.BusinessLayer.Bl
 {

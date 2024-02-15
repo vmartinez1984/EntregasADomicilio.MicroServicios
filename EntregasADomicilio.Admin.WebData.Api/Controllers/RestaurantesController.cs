@@ -1,5 +1,5 @@
 ﻿using EntregasADomicilio.Admin.WebData.Core.Dtos.Admin;
-using EntregasADomicilio.Admin.WebData.Core.Interfaces;
+using EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntregasADomicilio.Admin.WebData.Api.Controllers

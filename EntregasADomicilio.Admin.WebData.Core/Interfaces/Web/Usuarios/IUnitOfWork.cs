@@ -3,8 +3,11 @@ using System.Threading.Tasks;
 
 namespace EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Usuarios
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
+        public IUsuarioBl Usuario { get; set; }
+
+        public IClienteBl Cliente { get; set; }
     }
 
     public interface IUsuarioBl
@@ -13,7 +16,7 @@ namespace EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Usuarios
         Task<TokenDto> LoginAsync(LoginDto login);
     }
 
-    public interface IClienteVentaBl
+    public interface IClienteBl
     {
         Task<int> AgregarAsync(ClienteDtoIn cliente);
 

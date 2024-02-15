@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregasADomicilio.Admin.WebData.Core\EntregasADomicilio.Admin.WebData.Core.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Admin.WebData.Core\EntregasADomicilio.Core.csproj" />
   </ItemGroup>
 
 </Project>

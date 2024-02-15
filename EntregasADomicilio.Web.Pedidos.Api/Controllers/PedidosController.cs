@@ -1,21 +1,23 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using EntregasADomicilio.Admin.WebData.Core.Dtos.Web;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
-    public class PlatillosController : ControllerBase
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
+    public class PedidosController : ControllerBase
     {
-        /*
         /// <summary>
         /// 
         /// </summary>
         /// <param name="unitOfWork"></param>
-        public PlatillosController(IUnitOfWorkVentas unitOfWork) : base(unitOfWork)
+        public PedidosController(IUnitOfWorkVentas unitOfWork) 
         {
         }
 
@@ -27,7 +29,7 @@ namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(IdDto), 202)]
         [Produces("application/json")]
-        public async Task<IActionResult> AgregarPedido(PedidoVentaDtoIn pedido)
+        public async Task<IActionResult> AgregarPedido(PedidoDtoIn pedido)
         {
             int id;
             int clienteId;
@@ -37,6 +39,18 @@ namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
 
             return Created("", new { Id = id });
         }
+
+        private int ObtenerClienteId()
+        {
+            int clienteId;
+
+            var claim = this.HttpContext.User.Claims.First(x => x.Type == "ClienteId");
+            clienteId = int.Parse(claim.Value);
+
+            return clienteId;
+        }
+
+        /*
 
         /// <summary>
         /// Obtener pedido por número de pedido
