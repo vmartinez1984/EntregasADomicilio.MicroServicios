@@ -6,14 +6,17 @@ namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Bl
     {
         public UnitOfWork(
             IUsuarioBl usuarioBl,
-            IClienteBl clienteBl
+            IClienteBl clienteBl,
+            IPedidoBl pedidoBl
         )
         {
-            Usuario = usuarioBl;    
+            Usuario = usuarioBl;
             Cliente = clienteBl;
+            Pedido = pedidoBl;
         }
 
-        public IUsuarioBl Usuario { get; set; }
-        public IClienteBl Cliente { get; set; }
+        public IUsuarioBl Usuario { get; }
+        public IClienteBl Cliente { get; }
+        public IPedidoBl Pedido { get; }
     }
 }

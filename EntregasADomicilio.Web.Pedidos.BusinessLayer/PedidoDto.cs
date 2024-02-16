@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace EntregasADomicilio.Admin.WebData.Core.Dtos.Web
+namespace EntregasADomicilio.Web.Pedidos.BusinessLayer
 {
     public class PedidoDtoIn
     {

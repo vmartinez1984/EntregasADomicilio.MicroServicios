@@ -1,56 +1,46 @@
-﻿using EntregasADomicilio.Admin.WebData.Core.Dtos.Web;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using EntregasADomicilio.Web.Pedidos.BusinessLayer;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
     public class PedidosController : ControllerBase
     {
+        private readonly IPedidoBl _unitOfWork;
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="unitOfWork"></param>
-        public PedidosController(IUnitOfWorkVentas unitOfWork) 
+        public PedidosController(IPedidoBl unitOfWork)
         {
+            this._unitOfWork = unitOfWork;
         }
 
         /// <summary>
         /// Registrar pedido
         /// </summary>
         /// <param name="pedido"></param>
+        /// <param name="clienteId"></param>
         /// <response code="202"></response>
-        [HttpPost]
+        [HttpPost("clientes/{clienteId}")]
         [ProducesResponseType(typeof(IdDto), 202)]
         [Produces("application/json")]
-        public async Task<IActionResult> AgregarPedido(PedidoDtoIn pedido)
+        public async Task<IActionResult> AgregarPedido(PedidoDtoIn pedido, int clienteId)
         {
-            int id;
-            int clienteId;
+            int id;            
+                        
+            id = await _unitOfWork.AgregarAsync(pedido, clienteId);
 
-            clienteId = ObtenerClienteId();
-            id = await _unitOfWork.Pedido.AgregarAsync(pedido, clienteId);
-
-            return Created("", new { Id = id });
+            return Created($"Pedidos/{id}", new IdDto { Guid = pedido.Guid, Id = id});
         }
 
-        private int ObtenerClienteId()
-        {
-            int clienteId;
-
-            var claim = this.HttpContext.User.Claims.First(x => x.Type == "ClienteId");
-            clienteId = int.Parse(claim.Value);
-
-            return clienteId;
-        }
-
-        /*
 
         /// <summary>
         /// Obtener pedido por número de pedido
@@ -62,24 +52,27 @@ namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> ObtenerPedido(int pedidoId)
         {
+            PedidoDto pedido;
 
-            return Ok(new PedidoDto());
+            pedido = await _unitOfWork.ObtenerAsync(pedidoId);
+
+            return Ok(pedido);
         }
-
+                
         /// <summary>
         /// Obtiene la lista de pedidos del cliente
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        [ProducesResponseType(typeof(PedidoVentaDto), 200)]
-        [Produces("application/json")]
-        public async Task<IActionResult> ObtenerTodos()
+        [HttpGet("clientes/{clienteId}")]
+        [ProducesResponseType(typeof(PedidoDto), 200)]
+        [Produces("application/json")]        
+        public async Task<IActionResult> ObtenerTodos(int clienteId)
         {
-            List<PedidoVentaDto> pedidos;
+            List<PedidoDto> pedidos;
 
-            pedidos = await _unitOfWork.Pedido.ObtenerTodosPorClienteId(ObtenerClienteId());
+            pedidos = await _unitOfWork.ObtenerTodosPorClienteIdAsync(clienteId);
 
             return Ok(pedidos);
-        }*/
+        }
     }
 }

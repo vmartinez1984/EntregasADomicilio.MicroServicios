@@ -1,36 +1,19 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Reflection;
-using System.Text;
+using EntregasADomicilio.Web.Pedidos.BusinessLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddPedidos();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
-JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
-        opciones => opciones.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["LLaveJwt"])),
-            ClockSkew = TimeSpan.Zero
-        }
-);
 
 builder.Services.AddCors(options =>
 {
@@ -43,14 +26,6 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod()
         .AllowAnyHeader()
         .WithExposedHeaders("*");
-    });
-});
-
-builder.Services.AddAuthorization(options =>
-{    
-    options.AddPolicy("Cliente", policy =>
-    {
-        policy.RequireClaim("Role", "Cliente");
     });
 });
 
@@ -73,7 +48,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Viewer Server API v1");
+    c.SwaggerEndpoint("../swagger/v1/swagger.json", "Viewer Server API v1");
 });
 
 app.UseCors();

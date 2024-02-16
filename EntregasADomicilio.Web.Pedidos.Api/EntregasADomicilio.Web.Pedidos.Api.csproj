@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <!--<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>-->
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregasADomicilio.Admin.WebData.Core\EntregasADomicilio.Core.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.BusinessLayer\EntregasADomicilio.Web.Pedidos.BusinessLayer.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Usuarios.Repositorio.Sql\EntregasADomicilio.Web.Usuarios.Repositorio.Sql.csproj" />
   </ItemGroup>
 
 </Project>

@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EntregasADomicilio.Web.Usuarios.Repositorio.Sql\EntregasADomicilio.Web.Usuarios.Repositorio.Sql.csproj" />
+    <ProjectReference Include="..\EntregasADomilicio.Web.Pedidos.Repositorios.Ws\EntregasADomilicio.Web.Pedidos.Repositorios.Ws.csproj" />
   </ItemGroup>
 
 </Project>

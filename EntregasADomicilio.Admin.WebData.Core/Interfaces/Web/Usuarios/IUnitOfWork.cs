@@ -1,13 +1,16 @@
 ﻿using EntregasADomicilio.Admin.WebData.Core.Dtos.Web;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Usuarios
 {
     public interface IUnitOfWork
     {
-        public IUsuarioBl Usuario { get; set; }
+        public IUsuarioBl Usuario { get;  }
 
-        public IClienteBl Cliente { get; set; }
+        public IClienteBl Cliente { get;  }
+
+        public IPedidoBl Pedido { get;  }
     }
 
     public interface IUsuarioBl
@@ -29,5 +32,12 @@ namespace EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Usuarios
         Task ColocarComoPrincipalAsync(int direccionId, int clienteId);
 
         //Task ActualizarAsync(int clienteId, ClienteVentaDtoUpdate cliente);
+    }
+
+    public interface IPedidoBl
+    {
+        Task<IdDto> AgregarAsync(PedidoDtoIn pedido, int clienteId);
+        Task<PedidoDto> ObtenerPorIdAsync(int pedidoId);
+        Task<List<PedidoDto>> ObtenerTodosPorClienteId(int v);
     }
 }
