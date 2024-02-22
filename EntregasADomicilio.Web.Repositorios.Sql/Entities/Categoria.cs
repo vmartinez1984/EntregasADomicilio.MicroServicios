@@ -8,6 +8,7 @@ namespace EntregasADomicilio.Web.Repositorios.Sql.Entities
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public Guid Guid { get; set; }
 
         [MaxLength(50)]
