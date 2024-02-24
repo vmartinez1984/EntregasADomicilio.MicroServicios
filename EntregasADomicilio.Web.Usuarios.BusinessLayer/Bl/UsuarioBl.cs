@@ -57,9 +57,9 @@ namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Bl
         {
 
             var claims = new List<Claim>()
-                {
+            {
                     new Claim("email", credenciales.Correo)
-                };
+            };
 
             var usuario = await _userManager.FindByEmailAsync(credenciales.Correo);
             Cliente cliente;
@@ -72,7 +72,13 @@ namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Bl
             var llave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["LLaveJwt"]));
             var credential = new SigningCredentials(llave, SecurityAlgorithms.HmacSha256);
             var expiracion = DateTime.UtcNow.AddDays(1);
-            var token = new JwtSecurityToken(issuer: null, audience: null, claims: claims, expires: expiracion, signingCredentials: credential);
+            var token = new JwtSecurityToken(
+                //issuer: null, 
+                //audience: null, 
+                claims: claims, 
+                expires: expiracion, 
+                signingCredentials: credential
+            );
 
             return new TokenDto
             {
@@ -87,11 +93,11 @@ namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Bl
 
             cliente = await _repositorySql.Cliente.ObtenerPorUsuarioId(usuario.Id);
 
-            var claims = new List<Claim>()
-                {
+            var claims = new List<Claim>
+            {
                     new Claim("Nombre", $"{cliente.Nombre} {cliente.Apellidos}"),
                     new Claim("ClienteId", cliente.Id.ToString())
-                };
+            };
 
             return claims;
         }

@@ -28,7 +28,7 @@ namespace EntregasADomilicio.Web.Pedidos.Repositorios.Ws
             HttpResponseMessage response;
 
             client = _httpClientFactory.CreateClient();
-            request = new HttpRequestMessage(HttpMethod.Post, _url + usuarioId + "/pedidos");
+            request = new HttpRequestMessage(HttpMethod.Post, _url + "clientes/" + usuarioId );
             request.Content = new StringContent(JsonConvert.SerializeObject(pedido), null, "application/json");
             response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)

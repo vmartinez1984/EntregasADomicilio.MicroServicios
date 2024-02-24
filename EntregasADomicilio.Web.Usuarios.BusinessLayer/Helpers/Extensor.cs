@@ -4,7 +4,10 @@ using EntregasADomicilio.Web.Usuarios.BusinessLayer.Bl;
 using EntregasADomicilio.Web.Usuarios.Repositorio.Sql.Contexts;
 using EntregasADomicilio.Web.Usuarios.Repositorio.Sql.Repositorios;
 using EntregasADomilicio.Web.Pedidos.Repositorios.Ws;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Helpers
 {
@@ -33,4 +36,30 @@ namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Helpers
             services.AddSingleton(mapper);
         }
     }
+
+    public static class JwtExtensions
+    {
+        public const string SecurityKey = "VineAComala.ABuscarAMiPadreUnTalPedroParamo";
+
+        public static void AddJwtAuthentication(this IServiceCollection services)
+        {
+            services.AddAuthentication(opt => {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })               
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    //ValidIssuer = "https://localhost:5002",
+                    ValidateAudience = false,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecurityKey))
+                };
+            });
+        }
+    }
+
+
 }
