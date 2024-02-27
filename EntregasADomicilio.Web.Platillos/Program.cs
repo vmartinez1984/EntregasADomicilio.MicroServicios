@@ -1,9 +1,9 @@
-using EntregasADomicilio.Web.Repositorios.Sql.Extensors;
+using EntregasADomicilio.Web.Platillos.BusinessLayer.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRepositorySql();
+builder.Services.AddUnitOfWork();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

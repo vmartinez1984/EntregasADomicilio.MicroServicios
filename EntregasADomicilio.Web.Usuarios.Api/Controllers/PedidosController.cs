@@ -14,7 +14,11 @@ namespace EntregasADomicilio.Web.Usuarios.Api.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
     public class PedidosController : ControllerBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly IUnitOfWork _unitOfWork;
+
         /// <summary>
         /// 
         /// </summary>
@@ -43,6 +47,10 @@ namespace EntregasADomicilio.Web.Usuarios.Api.Controllers
             return Created($"/Pedidos/{id.Id}", id);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         protected int ObtenerClienteId()
         {
             int clienteId;

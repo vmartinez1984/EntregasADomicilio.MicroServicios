@@ -1,6 +1,6 @@
-﻿using EntregasADomicilio.Web.Repositorios.Sql.Interfaces;
+﻿using EntregasADomicilio.Web.Platillos.Core.Interfaces.Repositories;
 
-namespace EntregasADomicilio.Web.Repositorios.Sql.Repository
+namespace EntregasADomicilio.Web.Platillos.Repositorios.Sql.Repository
 {
     public class Repositorio : IRepositorio
     {

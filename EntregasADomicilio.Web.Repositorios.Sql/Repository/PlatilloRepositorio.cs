@@ -1,12 +1,12 @@
-﻿using EntregasADomicilio.Web.Repositorios.Sql.Contexts;
-using EntregasADomicilio.Web.Repositorios.Sql.Entities;
-using EntregasADomicilio.Web.Repositorios.Sql.Interfaces;
+﻿using EntregasADomicilio.Web.Platillos.Core.Entities;
+using EntregasADomicilio.Web.Platillos.Core.Interfaces.Repositories;
+using EntregasADomicilio.Web.Platillos.Repositorios.Sql.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EntregasADomicilio.Web.Repositorios.Sql.Repository
+namespace EntregasADomicilio.Web.Platillos.Repositorios.Sql.Repository
 {
     public class PlatilloRepositorio : IPlatillo
     {
@@ -17,7 +17,7 @@ namespace EntregasADomicilio.Web.Repositorios.Sql.Repository
             _appDbContext = appDbContext;
         }
 
-        public async Task<List<Platillo>> ObtenerTodos()
+        public async Task<List<Platillo>> ObtenerTodosAsync()
         {
             return
             await _appDbContext.Platillo

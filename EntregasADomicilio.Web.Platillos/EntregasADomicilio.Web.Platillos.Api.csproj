@@ -16,7 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregasADomicilio.Web.Repositorios.Sql\EntregasADomicilio.Web.Platillos.Repositorios.Sql.csproj" />
+    <ProjectReference Include="..\..\EntregasADomicilio.Web.Platillos.BusinessLayer\EntregasADomicilio.Web.Platillos.BusinessLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

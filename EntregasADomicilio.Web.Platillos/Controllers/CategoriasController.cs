@@ -1,5 +1,5 @@
-﻿using EntregasADomicilio.Web.Platillos.Dtos;
-using EntregasADomicilio.Web.Repositorios.Sql.Interfaces;
+﻿using EntregasADomicilio.Web.Platillos.BusinessLayer.Interfaces;
+using EntregasADomicilio.Web.Platillos.BusinessLayer.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntregasADomicilio.Web.Platillos.Controllers
@@ -8,21 +8,19 @@ namespace EntregasADomicilio.Web.Platillos.Controllers
     [ApiController]
     public class CategoriasController : ControllerBase
     {
-        private readonly IRepositorio _repositorio;
+        private readonly IUnitOfWorkBl _unitOfWorkBl;
 
-        public CategoriasController(IRepositorio repositorio)
+        public CategoriasController(IUnitOfWorkBl unitOfWorkBl)
         {
-            _repositorio = repositorio;
+            this._unitOfWorkBl = unitOfWorkBl;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            List<CategoriaDto> categoriaDtos;            
+            List<CategoriaDto> categoriaDtos;
 
-            categoriaDtos = (await _repositorio.Categoria.ObtenerTodos())
-                .Select(c => new CategoriaDto { Id  = c.Id, Nombre = c.Nombre })
-                .ToList();
+            categoriaDtos = await _unitOfWorkBl.Categoria.ObtenerTodos();
 
             return Ok(categoriaDtos);
         }

@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using EntregasADomicilio.Web.Platillos.Dtos;
-using EntregasADomicilio.Web.Repositorios.Sql.Entities;
-using EntregasADomicilio.Web.Repositorios.Sql.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using EntregasADomicilio.Web.Platillos.BusinessLayer.Dtos;
+using EntregasADomicilio.Web.Platillos.BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntregasADomicilio.Web.Platillos.Controllers
@@ -11,38 +8,26 @@ namespace EntregasADomicilio.Web.Platillos.Controllers
     [ApiController]
     public class PlatillosController : ControllerBase
     {
-        private readonly IRepositorio _repositorio;
-        //private readonly IMapper _mapper;
+        private readonly IUnitOfWorkBl _unitOfWorkBl;
 
-        public PlatillosController(IRepositorio repositorio
-        //    , IMapper mapper
-        )
+        public PlatillosController(IUnitOfWorkBl unitOfWorkBl)
         {
-            _repositorio = repositorio;
-           // _mapper = mapper;
+            this._unitOfWorkBl = unitOfWorkBl;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             List<PlatilloDto> platilloDtos;
-            List<Platillo> platillos;
 
-            platillos = await _repositorio.Platillo.ObtenerTodos();            
-            platilloDtos = platillos.Select(x => new PlatilloDto { 
-                Categoria = ObtenerCategoria(x.Categoria),
-                Id = x.Id,
-                Nombre = x.Nombre,
-                Precio = x.Precio,                
-                Descripcion = x.Descripcion                
-            }).ToList();
+            platilloDtos = await _unitOfWorkBl.Platillo.ObtnerTodos();
 
             return Ok(platilloDtos);
         }
 
-        private CategoriaDto ObtenerCategoria(Categoria categoria)
-        {
-            return new CategoriaDto { Nombre = categoria.Nombre, Id = categoria.Id };
-        }
+        //private CategoriaDto ObtenerCategoria(Categoria categoria)
+        //{
+        //    return new CategoriaDto { Nombre = categoria.Nombre, Id = categoria.Id };
+        //}
     }
 }

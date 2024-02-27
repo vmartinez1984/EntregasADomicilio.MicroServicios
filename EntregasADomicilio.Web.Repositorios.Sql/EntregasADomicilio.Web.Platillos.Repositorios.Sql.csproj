@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\EntregasADomicilio.Web.Platillos.Core\EntregasADomicilio.Web.Platillos.Core.csproj" />
+  </ItemGroup>
+
 </Project>

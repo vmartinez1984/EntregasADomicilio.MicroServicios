@@ -1,8 +1,8 @@
-﻿using EntregasADomicilio.Web.Repositorios.Sql.Entities;
+﻿using EntregasADomicilio.Web.Platillos.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace EntregasADomicilio.Web.Repositorios.Sql.Contexts
+namespace EntregasADomicilio.Web.Platillos.Repositorios.Sql.Contexts
 {
     public class AppDbContext: DbContext
     {
