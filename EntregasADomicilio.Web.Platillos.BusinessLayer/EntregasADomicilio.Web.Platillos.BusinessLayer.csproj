@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <!--<ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntregasADomicilio.V4\EntregasADomicilio.Web.Repositorios.Sql\EntregasADomicilio.Web.Platillos.Repositorios.Sql.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Platillos.Core\EntregasADomicilio.Web.Platillos.Core.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Platillos.Repositorios.NoSql\EntregasADomicilio.Web.Platillos.Repositorios.NoSql.csproj" />
+  </ItemGroup>
+
+</Project>

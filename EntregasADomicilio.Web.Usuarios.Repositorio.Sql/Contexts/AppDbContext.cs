@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntregasADomicilio.Web.Usuarios.Repositorio.Sql.Contexts
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : DbContext ///: IdentityDbContext
     {
         private readonly string _connectionString;
 

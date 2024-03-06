@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>-->
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\JwtTokenService\JwtTokenService.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,62 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5003"
+  },
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/gateway/categorias",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/WebPlatillos/api/Categorias",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8013
+        }
+      ]     
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/inicioDeSesion",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/Clientes/InicioDeSesion",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7153
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/pedidos",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/Pedidos",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7153
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+        //,"AllowedScopes": []
+      }//,
+      //"RouteClaimsRequirement": {
+      //  "role": "Administrator"
+      //}
+    }
+  ]//,
+  //"SwaggerEndPoints": [
+  //  {
+  //    "Key": "contacts",
+  //    "Config": [
+  //      {
+  //        "Name": "Contacts API",
+  //        "Version": "v1",
+  //        "Url": "http://localhost:5003/swagger/v1/swagger.json"
+  //      }
+  //    ]
+  //  }
+  //]
+}

@@ -1,5 +1,6 @@
 using EntregasADomicilio.Web.Usuarios.BusinessLayer.Helpers;
 using EntregasADomicilio.Web.Usuarios.Repositorio.Sql.Contexts;
+using EntregasADomiclio.AdminDeUsuario.Sql.Contexts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -11,24 +12,24 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddUnitOfWork();
+builder.Services.AddUnitOfWork(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
-        opciones => opciones.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["LLaveJwt"])),
-            ClockSkew = TimeSpan.Zero
-        }
-);
+//JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbUsersContext>().AddDefaultTokenProviders();
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+//        opciones => opciones.TokenValidationParameters = new TokenValidationParameters
+//        {
+//            ValidateIssuer = false,
+//            ValidateAudience = false,
+//            ValidateLifetime = true,
+//            ValidateIssuerSigningKey = true,
+//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["LLaveJwt"])),
+//            ClockSkew = TimeSpan.Zero
+//        }
+//);
 
 builder.Services.AddCors(options =>
 {

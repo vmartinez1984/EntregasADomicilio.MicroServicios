@@ -22,14 +22,14 @@ namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Bl
             return idDto;
         }
 
-        public async Task<PedidoDto> ObtenerPedidoAsync(int pedidoId)
-        {
-            PedidoDto pedidoDto;
+        //public async  Task<PedidoDto> ObtenerPedidoAsync(int pedidoId)
+        //{
+        //    PedidoDto pedidoDto;
 
-            pedidoDto = null;
+        //    pedidoDto = null;
 
-            return pedidoDto;
-        }
+        //    return pedidoDto;
+        //}
 
         public async Task<PedidoDto> ObtenerPorIdAsync(int pedidoId)
         {

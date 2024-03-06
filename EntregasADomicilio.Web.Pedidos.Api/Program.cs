@@ -5,11 +5,13 @@ using System;
 using System.IO;
 using System.Reflection;
 using EntregasADomicilio.Web.Pedidos.BusinessLayer;
+using JwtTokenService.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddPedidos();
+builder.Services.AddJwtAuthentication(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -40,6 +42,14 @@ builder.Services.AddSwaggerGen(gen =>
 
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     gen.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Cliente", policy =>
+    {
+        policy.RequireClaim("Role", "Cliente");
+    });
 });
 
 var app = builder.Build();
