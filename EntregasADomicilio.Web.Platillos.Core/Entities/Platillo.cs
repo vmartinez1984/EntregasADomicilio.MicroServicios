@@ -2,28 +2,35 @@
 using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
+using Google.Cloud.Firestore;
 
 namespace EntregasADomicilio.Web.Platillos.Core.Entities
 {
+    [FirestoreData]
     public class Platillo
     {
+        [FirestoreProperty]
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public Guid Guid { get; set; }
 
+        [FirestoreProperty]
         [Required(ErrorMessage = "El nombre es requerido")]
         [StringLength(50)]
         public string Nombre { get; set; }
 
+        [FirestoreProperty]
         [Required(ErrorMessage = "La descripción es requerida")]
         [StringLength(250)]
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
 
+        [FirestoreProperty]
         [Required(ErrorMessage = "El precio es requerido")]
-        public decimal Precio { get; set; }
+        public double Precio { get; set; }
 
+        [FirestoreProperty]
         public bool EstaActivo { get; set; } = true;
 
         [Required(ErrorMessage = "Seleccione una categoria")]
@@ -33,6 +40,10 @@ namespace EntregasADomicilio.Web.Platillos.Core.Entities
 
         public virtual Categoria Categoria { get; set; }
 
+        [FirestoreProperty("Categoria")]
+        public string CategoriaNombre { get; set; }
+
+        [FirestoreProperty]
         public List<Archivo> ListaDeArchivos { get; set; }
     }
 }

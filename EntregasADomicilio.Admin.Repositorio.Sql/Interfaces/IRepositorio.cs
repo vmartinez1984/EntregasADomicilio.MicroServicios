@@ -44,7 +44,7 @@ namespace EntregasADomicilio.Admin.Repositorio.Sql.Interfaces
         Task Borrar(int categoriaId);
 
         Task<Categoria> ObtenerPorIdAsync(int categoriaId);
-        Task<Categoria> ObtenerPorGuidAsync(Guid guid);
+        Task<Categoria> ObtenerPorGuidAsync(string id);
     }
 
     public interface IClienteRepository

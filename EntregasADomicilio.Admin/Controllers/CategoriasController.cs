@@ -33,10 +33,12 @@ namespace EntregasADomicilio.Admin.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CategoriaDtoIn categoria)
         {
-            int id;
+            string id;
             CategoriaDto categoriaDto;
-
-            categoriaDto = await _unitOfWork.Categoria.ObtenerPorGuid(categoria.Guid);
+            if (categoria.Id == Guid.Empty)
+                categoriaDto = await _unitOfWork.Categoria.ObtenerPorGuid(categoria.Id);
+            else
+                categoriaDto = null;
             if (categoriaDto is not null)
             {
                 return Ok(categoriaDto);
@@ -53,7 +55,7 @@ namespace EntregasADomicilio.Admin.Api.Controllers
         /// <param name="categoria"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] CategoriaDtoIn categoria)
+        public async Task<IActionResult> Put(Guid id, [FromBody] CategoriaDtoUpdate categoria)
         {
             await _unitOfWork.Categoria.Actualizar(id, categoria);
 

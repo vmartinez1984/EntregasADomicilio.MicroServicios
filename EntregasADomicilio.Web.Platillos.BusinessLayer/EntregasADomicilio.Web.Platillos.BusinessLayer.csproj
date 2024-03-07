@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregasADomicilio.V4\EntregasADomicilio.Web.Repositorios.Sql\EntregasADomicilio.Web.Platillos.Repositorios.Sql.csproj" />
+    <ProjectReference Include="..\..\EntregasADomiclio.Web.Platillos.Repositorio.FireStore\EntregasADomicilio.Web.Platillos.Repositorios.FireStore.csproj" />
     <ProjectReference Include="..\EntregasADomicilio.Web.Platillos.Core\EntregasADomicilio.Web.Platillos.Core.csproj" />
-    <ProjectReference Include="..\EntregasADomicilio.Web.Platillos.Repositorios.NoSql\EntregasADomicilio.Web.Platillos.Repositorios.NoSql.csproj" />
+    <ProjectReference Include="..\EntregasADomiclio.StoreFilesLocal\EntregasADomicilio.StoreFiles.csproj" />
   </ItemGroup>
 
 </Project>

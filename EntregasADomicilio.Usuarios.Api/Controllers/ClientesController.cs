@@ -67,5 +67,15 @@ namespace EntregasADomicilio.Usuarios.Api.Controllers
 
             return Ok(new { Id = clienteId });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ObtenerCliente()
+        {
+            ClienteDto cliente;
+
+            cliente = await _unitOfWork.Cliente.ObtenerAsync(ObtenerClienteId());
+
+            return Ok(cliente);
+        }
     }
 }

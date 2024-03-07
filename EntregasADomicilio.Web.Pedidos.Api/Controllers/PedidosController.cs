@@ -45,6 +45,10 @@ namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
             return Created($"Pedidos/{id}", new IdDto { Guid = pedido.Guid, Id = id});
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         protected string ObtenerClienteId()
         {
             //string clienteId;

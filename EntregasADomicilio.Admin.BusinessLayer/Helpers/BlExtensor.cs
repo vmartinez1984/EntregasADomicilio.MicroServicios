@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using EntregasADomicilio.Admin.BusinessLayer.Bl;
-using EntregasADomicilio.Admin.Repositorio.Sql.Contexts;
-using EntregasADomicilio.Admin.Repositorio.Sql.Entities;
-using EntregasADomicilio.Admin.Repositorio.Sql.Interfaces;
+using EntregasADomicilio.Admin.Platillos.Core.Interfaces;
+using EntregasADomicilio.Admin.Platillos.FireStore.Repositorios;
 using EntregasADomicilio.StoreFiles;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,23 +11,18 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Helpers
     {
         public static void AddUnitOfWork(this IServiceCollection services)
         {
-            services.AddScoped<AppDbContext>();
+            //services.AddScoped<AppDbContext>();
 
-            services.AddScoped<IRepositorySql, RepositorySql>();
+            services.AddScoped<IRepositorio, Repositorio>();
 
-            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-            services.AddScoped<IClienteRepository, ClienteRepository>();
-            services.AddScoped<IDireccionRepository, DireccionRepository>();
-            services.AddScoped<IPlatilloRepository, PlatilloRepository>();
-            services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+            services.AddScoped<IPlatilloRepositorio, PlatilloRepositorio>();            
 
             services.AddScoped<AlmacenDeArchivosFirebase>();
 
             services.AddScoped<UnitOfWorkBl>();
 
             services.AddScoped<CategoriaBl>();
-            //services.AddScoped<IUsuarioBl, UsuarioBl>();
-            //services.AddScoped<IClienteBl, ClienteBl>();
             services.AddScoped<PlatilloBl>();
 
             //Mappers

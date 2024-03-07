@@ -12,7 +12,7 @@ namespace EntregasADomicilio.Web.Platillos.Controllers
 
         public PlatillosController(IUnitOfWorkBl unitOfWorkBl)
         {
-            this._unitOfWorkBl = unitOfWorkBl;
+            _unitOfWorkBl = unitOfWorkBl;
         }
 
         [HttpGet]
@@ -25,9 +25,18 @@ namespace EntregasADomicilio.Web.Platillos.Controllers
             return Ok(platilloDtos);
         }
 
-        //private CategoriaDto ObtenerCategoria(Categoria categoria)
-        //{
-        //    return new CategoriaDto { Nombre = categoria.Nombre, Id = categoria.Id };
-        //}
+        /// <summary>
+        /// Obtiene la imagen del platillo por id
+        /// </summary>
+        /// <param name="platilloId"></param>        
+        [HttpGet("{platilloId}/Imagen")]
+        public async Task<IActionResult> ObtenerImagenPorPlatilloId(Guid platilloId)
+        {
+            byte[] bytes;
+
+            bytes = await _unitOfWorkBl.Platillo.ObtenerBytesAsync(platilloId);
+
+            return File(bytes, "image/png");            
+        }
     }
 }

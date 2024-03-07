@@ -1,24 +1,32 @@
-﻿using System;
+﻿using Google.Cloud.Firestore;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntregasADomicilio.Web.Platillos.Core.Entities
 {
+    [FirestoreData]
     public class Archivo
     {
+        [FirestoreProperty]
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public Guid Guid { get; set; }
 
+        [FirestoreProperty]
         public string NombreDelArchivo { get; set; }
 
+        [FirestoreProperty]
         public string AliasDelArchivo { get; set; }
 
+        [FirestoreProperty]
         public string RutaDelArchivo { get; set; }
 
+        [FirestoreProperty]
         public string ContentType { get; set; }
 
+        [FirestoreProperty]
         public string NombreDelAlmacen { get; set; }
 
         [ForeignKey(nameof(Platillo))]
@@ -26,8 +34,10 @@ namespace EntregasADomicilio.Web.Platillos.Core.Entities
 
         public virtual Platillo Platillo { get; set; }
 
+        [FirestoreProperty]
         public DateTime FechaDeRegistro { get; set; }
 
+        [FirestoreProperty]
         public bool EstaActivo { get; set; }
     }
 }

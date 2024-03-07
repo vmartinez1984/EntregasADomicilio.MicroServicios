@@ -6,6 +6,7 @@ namespace EntregasADomicilio.Web.Platillos.Core.Interfaces.Repositories
 {
     public interface IPlatillo
     {
+        Task<Platillo> ObtenerPorIdAsync(string v);
         Task<List<Platillo>> ObtenerTodosAsync();
     }
 }

@@ -4,7 +4,7 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Dtos
 {
     public class CategoriaDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Nombre { get; set; }
 
@@ -17,6 +17,13 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Dtos
 
         public bool EstaActivo { get; set; } = true;
 
-        public Guid  Guid { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; } = Guid.NewGuid();
+    }
+
+    public class CategoriaDtoUpdate
+    {
+        public string Nombre { get; set; }
+
+        public bool EstaActivo { get; set; } = true;        
     }
 }

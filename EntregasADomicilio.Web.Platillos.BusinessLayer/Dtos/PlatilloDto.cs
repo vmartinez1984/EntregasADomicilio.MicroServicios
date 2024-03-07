@@ -1,10 +1,12 @@
-﻿namespace EntregasADomicilio.Web.Platillos.BusinessLayer.Dtos
+﻿using System;
+
+namespace EntregasADomicilio.Web.Platillos.BusinessLayer.Dtos
 {
     public class PlatilloDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
-        public CategoriaDto Categoria { get; set; }
+        public string Categoria { get; set; }
 
         public string Nombre { get; set; }
 

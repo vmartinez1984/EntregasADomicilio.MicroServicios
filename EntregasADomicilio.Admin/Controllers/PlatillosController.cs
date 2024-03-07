@@ -25,7 +25,7 @@ namespace EntregasADomicilio.Admin.Api.Controllers
         {
             List<PlatilloDto> platillos;
 
-            platillos = await _unitOfWork.Platillo.ObtenerTodosAsync(true);
+            platillos = await _unitOfWork.Platillo.ObtenerTodosAsync();
 
             return Ok(platillos);
         }
@@ -35,7 +35,7 @@ namespace EntregasADomicilio.Admin.Api.Controllers
         /// </summary>
         /// <param name="platilloId"></param>        
         [HttpGet("{platilloId}/Imagen")]
-        public async Task<IActionResult> ObtenerImagenPorPlatilloId(int platilloId)
+        public async Task<IActionResult> ObtenerImagenPorPlatilloId(Guid platilloId)
         {
             byte[] bytes;
 
@@ -51,7 +51,7 @@ namespace EntregasADomicilio.Admin.Api.Controllers
         /// <param name="platilloId"></param>
         /// <response code="200">PlatilloDto</response>
         [HttpGet("{platilloId}")]
-        public async Task<IActionResult> ObtenerPorPlatilloId(int platilloId)
+        public async Task<IActionResult> ObtenerPorPlatilloId(Guid platilloId)
         {
             PlatilloDto platillo;
 
@@ -68,8 +68,16 @@ namespace EntregasADomicilio.Admin.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] PlatilloDtoIn platillo)
         {
-            int id;
+            string id;
+            bool existe;
 
+            existe = await _unitOfWork.Categoria.ExisteAsync(platillo.Categoria);
+            if (!existe)
+            {
+                this.ModelState.AddModelError(nameof(PlatilloDtoIn.Categoria), "No existe la categoria");
+
+                return BadRequest();
+            }
             id = await _unitOfWork.Platillo.AgregarAsync(platillo);
 
             return Created($"Platillos/{id}", new { Id = id });
@@ -81,23 +89,12 @@ namespace EntregasADomicilio.Admin.Api.Controllers
         /// <param name="id"></param>
         /// <param name="platillo"></param>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromForm] PlatilloDtoIn platillo)
+        public async Task<IActionResult> Put(Guid id, [FromForm] PlatilloDtoIn platillo)
         {
             await _unitOfWork.Platillo.ActualizarAsync(id, platillo);
 
             return Accepted();
         }
 
-        /// <summary>
-        /// Borrar por su id
-        /// </summary>
-        /// <param name="id"></param>
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _unitOfWork.Platillo.BorrarAsync(id);
-
-            return Accepted();
-        }
     }
 }

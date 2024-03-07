@@ -1,57 +1,103 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5003"
+    "BaseUrl": "http://localhost:5000"
   },
   "Routes": [
     {
       "UpstreamPathTemplate": "/gateway/categorias",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/WebPlatillos/api/Categorias",
+      "DownstreamPathTemplate": "/api/Categorias",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 8013
-        }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      } //,
-      //,"ServiceName": "contacts",
-      //"SwaggerKey": "contacts"
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/inicioDeSesion",
-      "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamScheme": "http",
-      "DownstreamPathTemplate": "/WebUsuarios/api/Clientes/InicioDeSesion",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 8013
+          "Port": 7854
         }
       ]
     },
     {
-      "UpstreamPathTemplate": "/gateway/pedidos",
-      "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamScheme": "https",
-      "DownstreamPathTemplate": "/api/Pedidos",
+      "UpstreamPathTemplate": "/gateway/platillos",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Platillos",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7153
+          "Port": 7854
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/platillos/{platilloId}/Imagen",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Platillos/{platilloId}/Imagen",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7854
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/InicioDeSesion",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Clientes/IniciarSesion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7096
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/clientes",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Clientes",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7096
         }
       ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer"
-        //,"AllowedScopes": []
-      }//,
-      //"RouteClaimsRequirement": {
-      //  "role": "Administrator"
-      //}
+      }
     }
-  ]//,
+    //{
+    //  "UpstreamPathTemplate": "/gateway/inicioDeSesion",
+    //  "UpstreamHttpMethod": [ "Post" ],
+    //  "DownstreamScheme": "http",
+    //  "DownstreamPathTemplate": "/WebUsuarios/api/Clientes/InicioDeSesion",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 8013
+    //    }
+    //  ]
+    //} //,
+    //{
+    //  "UpstreamPathTemplate": "/gateway/pedidos",
+    //  "UpstreamHttpMethod": [ "Post" ],
+    //  "DownstreamScheme": "https",
+    //  "DownstreamPathTemplate": "/api/Pedidos",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7153
+    //    }
+    //  ],
+    //  "AuthenticationOptions": {
+    //    "AuthenticationProviderKey": "Bearer"
+    //    //,"AllowedScopes": []
+    //  }//,
+    //  //"RouteClaimsRequirement": {
+    //  //  "role": "Administrator"
+    //  //}
+    //}
+  ] //,
   //"SwaggerEndPoints": [
   //  {
   //    "Key": "contacts",

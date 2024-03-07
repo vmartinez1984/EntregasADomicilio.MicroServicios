@@ -1,6 +1,6 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5003"
+    "BaseUrl": "http://localhost:5000"
   },
   "Routes": [
     {
@@ -11,41 +11,53 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 8013
-        }
-      ]     
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/inicioDeSesion",
-      "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamScheme": "https",
-      "DownstreamPathTemplate": "/api/Clientes/InicioDeSesion",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7153
+          "Port": 813
         }
       ]
     },
     {
-      "UpstreamPathTemplate": "/gateway/pedidos",
-      "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamScheme": "https",
-      "DownstreamPathTemplate": "/api/Pedidos",
+      "UpstreamPathTemplate": "/gateway/platillos",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/WebPlatillos/api/Platillos",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7153
+          "Port": 8013
         }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-        //,"AllowedScopes": []
-      }//,
-      //"RouteClaimsRequirement": {
-      //  "role": "Administrator"
-      //}
-    }
+      ]
+    }//,
+    //{
+    //  "UpstreamPathTemplate": "/gateway/inicioDeSesion",
+    //  "UpstreamHttpMethod": [ "Post" ],
+    //  "DownstreamScheme": "https",
+    //  "DownstreamPathTemplate": "/api/Clientes/InicioDeSesion",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7153
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/pedidos",
+    //  "UpstreamHttpMethod": [ "Post" ],
+    //  "DownstreamScheme": "https",
+    //  "DownstreamPathTemplate": "/api/Pedidos",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7153
+    //    }
+    //  ],
+    //  "AuthenticationOptions": {
+    //    "AuthenticationProviderKey": "Bearer"
+    //    //,"AllowedScopes": []
+    //  } //,
+    //  //"RouteClaimsRequirement": {
+    //  //  "role": "Administrator"
+    //  //}
+    //}
   ]//,
   //"SwaggerEndPoints": [
   //  {

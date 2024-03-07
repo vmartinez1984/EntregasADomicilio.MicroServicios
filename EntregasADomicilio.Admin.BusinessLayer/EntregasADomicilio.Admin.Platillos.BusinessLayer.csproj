@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregasADomicilio.Admin.Repositorio.Sql\EntregasADomicilio.Admin.Repositorio.Sql.csproj" />
+    <ProjectReference Include="..\..\EntregasADomicilio.Admin.Platillos.FireStore\EntregasADomicilio.Admin.Platillos.FireStore.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Admin.Platillos.Core\EntregasADomicilio.Admin.Platillos.Core.csproj" />
     <ProjectReference Include="..\EntregasADomiclio.StoreFilesLocal\EntregasADomicilio.StoreFiles.csproj" />
   </ItemGroup>
 

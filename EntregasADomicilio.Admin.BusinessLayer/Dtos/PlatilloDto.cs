@@ -6,11 +6,10 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Dtos
 {
     public class PlatilloDtoIn
     {
-        [Required]
-        public string Nombre { get; set; }
+        public Guid? Id { get; set; } = Guid.NewGuid();
 
         [Required]
-        public Guid Guid { get; set; } = Guid.NewGuid();
+        public string Nombre { get; set; }        
 
         [Required]
         [MaxLength(500)]
@@ -23,19 +22,21 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Dtos
         public IFormFile FormFile { get; set; }
 
         [Required]
-        public int CategoriaId { get; set; }
+        public string Categoria { get; set; }
     }
 
     public class PlatilloDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
-        public CategoriaDto Categoria { get; set; }
+        public string Categoria { get; set; }
 
         public string Nombre { get; set; }
 
         public string Descripcion { get; set; }
 
         public decimal Precio { get; set; }
+
+        public bool EstaActivo { get; set; }
     }
 }

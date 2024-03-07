@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="Google.Cloud.Firestore" Version="3.5.1" />
-    <PackageReference Include="MongoDB.Bson" Version="2.24.0" />
   </ItemGroup>
 
 </Project>

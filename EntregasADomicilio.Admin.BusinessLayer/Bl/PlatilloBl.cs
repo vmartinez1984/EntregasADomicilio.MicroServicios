@@ -2,8 +2,8 @@
 using AutoMapper;
 using EntregasADomicilio.Admin.BusinessLayer.Constants;
 using EntregasADomicilio.Admin.BusinessLayer.Dtos;
-using EntregasADomicilio.Admin.Repositorio.Sql.Entities;
-using EntregasADomicilio.Admin.Repositorio.Sql.Interfaces;
+using EntregasADomicilio.Admin.Platillos.Core.Entidades;
+using EntregasADomicilio.Admin.Platillos.Core.Interfaces;
 using EntregasADomicilio.StoreFiles;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Bl
 {
     public class PlatilloBl //: IPlatilloBl
     {
-        private readonly IRepositorySql _repositorySql;
+        private readonly IRepositorio _repositorySql;
         //private readonly IAlmacenadorDeArchivos _almacenDeArchivosVMtz;
         //private readonly IAlmacenadorDeArchivosS3 _almacenadorDeArchivosS3;
         private readonly AlmacenDeArchivosFirebase _almacenadorDeArchivosFirebaseStorage;
@@ -23,7 +23,7 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Bl
         private readonly string _contenedor = "platillos";
 
         public PlatilloBl(
-            IRepositorySql repositorySql,
+            IRepositorio repositorySql,
             //IAlmacenadorDeArchivos almacenadorDeArchivos,
             //IAlmacenadorDeArchivosS3 almacenadorDeArchivosS3,
             AlmacenDeArchivosFirebase almacenadorDeArchivosFirebaseStorage,
@@ -55,15 +55,17 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Bl
         //    await _repositorySql.Platillo.ActualizarAsync(entity);
         //}
 
-        public async Task<int> AgregarAsync(PlatilloDtoIn platillo)
+        public async Task<string> AgregarAsync(PlatilloDtoIn platillo)
         {
             Platillo entity;
             string aliasDelArchivo;
 
-            aliasDelArchivo = $"{Guid.NewGuid()}{Path.GetExtension(platillo.FormFile.FileName)}";
+            if(platillo.Id == Guid.Empty || platillo.Id == null)
+                platillo.Id = Guid.NewGuid();
+            //aliasDelArchivo = $"{platillo.Id}{Path.GetExtension(platillo.FormFile.FileName)}";
             //Archivo archivoVMtz = await GuardarEnAlamcenVMtz(platillo, aliasDelArchivo, AlmacenDeArchivos.AlmacenVMtz);
             //Archivo archivoS3 = await GuardarEnAlamcenVMtz(platillo, aliasDelArchivo, AlmacenDeArchivos.MinioS3);
-            Archivo archivoFireStore = await GuardarEnAlamcenVMtz(platillo, aliasDelArchivo, AlmacenDeArchivos.FirebaseStorage);
+            //Archivo archivoFireStore = await GuardarEnAlamcenVMtz(platillo, aliasDelArchivo, AlmacenDeArchivos.FirebaseStorage);
 
             entity = _mapper.Map<Platillo>(platillo);
             entity.ListaDeArchivos = await ObtenerListaDeArchivosAsync(platillo);
@@ -78,7 +80,7 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Bl
             List<Archivo> archivos;
             string aliasDelArchivo;
 
-            aliasDelArchivo = $"{Guid.NewGuid()}{Path.GetExtension(platillo.FormFile.FileName)}";
+            aliasDelArchivo = $"{platillo.Id}{Path.GetExtension(platillo.FormFile.FileName)}";
             //Archivo archivoVMtz = await GuardarEnAlamcenVMtz(platillo, aliasDelArchivo, AlmacenDeArchivos.AlmacenVMtz);
             //Archivo archivoS3 = await GuardarEnAlamcenVMtz(platillo, aliasDelArchivo, AlmacenDeArchivos.MinioS3);
             Archivo archivoFireStore = await GuardarEnAlamcenVMtz(platillo, aliasDelArchivo, AlmacenDeArchivos.FirebaseStorage);
@@ -218,29 +220,34 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Bl
             return dtos;
         }
 
-        public async Task<PlatilloDto> ObtenerPorId(int platilloId)
+        public async Task<PlatilloDto> ObtenerPorId(Guid platilloId)
         {
             Platillo platillo;
             PlatilloDto platilloDto;
 
-            platillo = await _repositorySql.Platillo.ObtenerPorIdAsync(platilloId);
+            platillo = await _repositorySql.Platillo.ObtenerPorIdAsync(platilloId.ToString());
             platilloDto = _mapper.Map<PlatilloDto>(platillo);
 
             return platilloDto;
         }
 
-        public async Task<byte[]> ObtenerBytesAsync(int platilloId)
+        public async Task<byte[]> ObtenerBytesAsync(Guid platilloId)
         {
             Platillo platillo;
 
-            platillo = await _repositorySql.Platillo.ObtenerPorIdAsync(platilloId);
+            platillo = await _repositorySql.Platillo.ObtenerPorIdAsync(platilloId.ToString());
 
-            return await ObtenerBytesDeAlmacenAsync(platillo.ListaDeArchivos, AlmacenDeArchivos.FirebaseStorage); 
+            return await ObtenerBytesDeAlmacenAsync(platillo.ListaDeArchivos, AlmacenDeArchivos.FirebaseStorage);
         }
 
-        public Task ActualizarAsync(int id, PlatilloDtoIn platillo)
+        public async Task ActualizarAsync(Guid id, PlatilloDtoIn platillo)
         {
-            throw new NotImplementedException();
+            Platillo platilloEntity;
+
+            platilloEntity = await _repositorySql.Platillo.ObtenerPorIdAsync(id.ToString());
+            platilloEntity = _mapper.Map(platillo, platilloEntity);
+
+            await _repositorySql.Platillo.ActualizarAsync(platilloEntity);
         }
 
         public Task BorrarAsync(int id)

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EntregasADomicilio.Admin.BusinessLayer.Dtos;
-using EntregasADomicilio.Admin.Repositorio.Sql.Entities;
+using EntregasADomicilio.Admin.Platillos.Core.Entidades;
+using System;
 
 namespace EntregasADomicilio.Admin.BusinessLayer.Helpers
 {
@@ -10,15 +11,12 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Helpers
         {
             CreateMap<Categoria, CategoriaDto>();
             CreateMap<CategoriaDtoIn, Categoria>();
+            CreateMap<CategoriaDtoUpdate, Categoria>();
 
-            //CreateMap<ClienteDtoIn, Cliente>();
-            //CreateMap<DireccionDtoIn, Direccion>();
-            //CreateMap<ClienteDtoUpdate, Cliente>();
-            //CreateMap<Cliente, ClienteDto>();
-            //CreateMap<Direccion, DireccionDto>();
-
-            CreateMap<PlatilloDtoIn, Platillo>();
+            CreateMap<PlatilloDtoIn, Platillo>()
+                .ForMember(platillo => platillo.Id, platilloDto => platilloDto.MapFrom(x=>x.Id.ToString()));
             CreateMap<Platillo, PlatilloDto>();
+                //.ForMember(platilloDto => platilloDto.Id);
         }
     }
 }
