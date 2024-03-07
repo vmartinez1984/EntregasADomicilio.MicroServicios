@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/EntregasADomicilio.Admin/entregasadomicilio-7e116.json
+/EntregasADomicilio.Usuarios.Api/entregasadomicilio-7e116.json
+/EntregasADomicilio.Web.Platillos/entregasadomicilio-7e116.json
