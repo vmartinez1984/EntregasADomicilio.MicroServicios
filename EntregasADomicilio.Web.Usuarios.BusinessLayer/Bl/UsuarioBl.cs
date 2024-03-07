@@ -1,8 +1,8 @@
 ﻿using EntregasADomicilio.Admin.WebData.Core.Dtos.Web;
 using EntregasADomicilio.Admin.WebData.Core.Entities;
 using EntregasADomicilio.Admin.WebData.Core.Interfaces.Web.Usuarios;
-using EntregasADomicilio.Web.Usuarios.Core.Entitites;
-using EntregasADomicilio.Web.Usuarios.Core.Interfaces.Repositories;
+//using EntregasADomicilio.Web.Usuarios.Core.Entitites;
+//using EntregasADomicilio.Web.Usuarios.Core.Interfaces.Repositories;
 using JwtTokenService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +12,7 @@ namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Bl
 {
     public class UsuarioBl : IUsuarioBl
     {
-        private readonly IUsuarioRepositorio _usuarioRepositorio;
+        //private readonly IUsuarioRepositorio _usuarioRepositorio;
         //private readonly UserManager<IdentityUser> _userManager;
         //private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IConfiguration _configuration;
@@ -22,13 +22,13 @@ namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Bl
         public UsuarioBl(
             //UserManager<IdentityUser> userManager,
             //SignInManager<IdentityUser> signInManager,
-            IUsuarioRepositorio usuarioRepositorio,
+            //IUsuarioRepositorio usuarioRepositorio,
             IConfiguration configuration,
             IRepositorio repositorySql,
             JwtToken jwtTokenService
         )
         {
-            _usuarioRepositorio = usuarioRepositorio;
+            //_usuarioRepositorio = usuarioRepositorio;
             //_userManager = userManager;
             //_signInManager = signInManager;
             _configuration = configuration;
@@ -40,25 +40,26 @@ namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Bl
 
         public async Task<TokenDto> LoginAsync(LoginDto login)
         {
-            UsuarioEntity usuarioEntity;
+            throw new NotImplementedException();
+            //UsuarioEntity usuarioEntity;
 
 
-            usuarioEntity = await _usuarioRepositorio.ObtenerUsuarioAsync(login.Correo, login.Contrasenia);
-            if(usuarioEntity == null)
-            {
-                return null;
-            }
-            else
-            {                
-                Cliente cliente;
+            //usuarioEntity = await _usuarioRepositorio.ObtenerUsuarioAsync(login.Correo, login.Contrasenia);
+            //if(usuarioEntity == null)
+            //{
+            //    return null;
+            //}
+            //else
+            //{                
+            //    Cliente cliente;
 
-                cliente = await _repositorySql.Cliente.ObtenerPorUsuarioId(usuarioEntity.Id);
+            //    cliente = await _repositorySql.Cliente.ObtenerPorUsuarioId(usuarioEntity.Id);
 
-                return new TokenDto(
-                    _jwtTokenService.ObtenerToken(cliente.Nombre + " " + cliente.Apellidos, "Cliente", cliente.Id.ToString(), login.Correo, DateTime.Now.AddMinutes(20)),
-                     DateTime.Now.AddMinutes(20)
-                );
-            }
+            //    return new TokenDto(
+            //        _jwtTokenService.ObtenerToken(cliente.Nombre + " " + cliente.Apellidos, "Cliente", cliente.Id.ToString(), login.Correo, DateTime.Now.AddMinutes(20)),
+            //         DateTime.Now.AddMinutes(20)
+            //    );
+            //}
 
             //var resultado = await _signInManager.PasswordSignInAsync(login.Correo, login.Contrasenia, isPersistent: false, lockoutOnFailure: false);
             //if (resultado.Succeeded)
