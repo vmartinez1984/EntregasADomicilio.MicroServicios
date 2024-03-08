@@ -20,11 +20,11 @@ namespace EntregasADomicilio.Usuarios.Api.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> AgregarAsync([FromBody] ClienteDtoIn clientte)
+        public async Task<IActionResult> AgregarAsync([FromBody] UsuarioDtoIn usuario)
         {
-            await _unitOfWork.Cliente.AgregarAsync(clientte);
+            await _unitOfWork.Cliente.AgregarAsync(usuario);
 
-            return Created("", new { Id = clientte.Id });
+            return Created("", new { Id = usuario.Id });
         }
 
         [HttpPost("IniciarSesion")]
@@ -39,7 +39,7 @@ namespace EntregasADomicilio.Usuarios.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Actualizar(ClienteDtoIn cliente)
+        public async Task<IActionResult> Actualizar(UsuarioDtoIn cliente)
         {
             string clienteId;
 
