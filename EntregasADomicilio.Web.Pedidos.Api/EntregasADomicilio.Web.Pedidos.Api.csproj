@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\JwtTokenService\JwtTokenService.csproj" />
+    <ProjectReference Include="..\JwtTokenService\JwtTokenService.csproj" />
     <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.BusinessLayer\EntregasADomicilio.Web.Pedidos.BusinessLayer.csproj" />
     <ProjectReference Include="..\EntregasADomicilio.Web.Usuarios.Repositorio.Sql\EntregasADomicilio.Web.Usuarios.Repositorio.Sql.csproj" />
   </ItemGroup>

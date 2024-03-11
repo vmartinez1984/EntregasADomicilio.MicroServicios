@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <!--<Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>-->
+	-->
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\JwtTokenService\JwtTokenService.csproj" />
+    <ProjectReference Include="..\JwtTokenService\JwtTokenService.csproj" />
   </ItemGroup>
 
   <!--<ItemGroup>

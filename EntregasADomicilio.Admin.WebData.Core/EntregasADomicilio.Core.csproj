@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\JwtTokenService\JwtTokenService.csproj" />
+    <ProjectReference Include="..\JwtTokenService\JwtTokenService.csproj" />
   </ItemGroup>
 
 </Project>

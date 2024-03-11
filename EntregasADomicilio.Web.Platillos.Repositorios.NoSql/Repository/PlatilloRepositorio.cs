@@ -15,7 +15,12 @@ namespace EntregasADomicilio.Web.Platillos.Repositorios.NoSql.Repository
 
         }
 
-        public async Task<List<Platillo>> ObtenerTodosAsync()
+        public Task<Platillo> ObtenerPorIdAsync(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Platillo>> ObtenerTodosAsync()
         {
             throw new NotImplementedException();
         }

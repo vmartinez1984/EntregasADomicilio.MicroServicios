@@ -18,10 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EntregasADomicilio.AdminDeUsuario.NoSql\EntregasADomicilio.AdminDeUsuario.NoSql.csproj" />
-    <ProjectReference Include="..\..\EntregasADomicilio.Web.Usuarios.Core\EntregasADomicilio.Web.Usuarios.Core.csproj" />
-    <ProjectReference Include="..\..\EntregasADomiclio.AdminDeUsuario.Sql\EntregasADomicilio.AdminDeUsuario.Sql.csproj" />
-    <ProjectReference Include="..\..\JwtTokenService\JwtTokenService.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.AdminDeUsuario.NoSql\EntregasADomicilio.AdminDeUsuario.NoSql.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Usuarios.Core\EntregasADomicilio.Web.Usuarios.Core.csproj" />
+    <ProjectReference Include="..\EntregasADomiclio.AdminDeUsuario.Sql\EntregasADomicilio.AdminDeUsuario.Sql.csproj" />
+    <ProjectReference Include="..\JwtTokenService\JwtTokenService.csproj" />
     <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Repositorios.Sql\EntregasADomicilio.Web.Pedidos.Repositorios.Sql.csproj" />
     <ProjectReference Include="..\EntregasADomicilio.Web.Usuarios.Repositorio.Sql\EntregasADomicilio.Web.Usuarios.Repositorio.Sql.csproj" />
     <ProjectReference Include="..\EntregasADomilicio.Web.Pedidos.Repositorios.Ws\EntregasADomilicio.Web.Pedidos.Repositorios.Ws.csproj" />
