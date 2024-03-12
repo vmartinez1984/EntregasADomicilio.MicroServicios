@@ -12,3 +12,9 @@ services:
 
 
   
+  entregasadomicilio.usuarios.api:
+    image: ${DOCKER_REGISTRY-}entregasadomiciliousuariosapi
+    build:
+      context: .
+      dockerfile: EntregasADomicilio.Usuarios.Api/Dockerfile
+

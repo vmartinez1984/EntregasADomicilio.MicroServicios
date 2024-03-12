@@ -6,7 +6,7 @@ namespace EntregasADomicilio.Usuarios.Repositorios.Firestore.Login
 {
     public class InicioDeSesionRepositorio : IInicioDeSesion
     {
-        string ruta = ".\\entregasadomicilio-7e116.json";
+        string ruta = "entregasadomicilio-7e116.json";
         string projectId;
         FirestoreDb _firestoreDb;
         string coleccion = "inicioDeSesiones";
