@@ -1,12 +1,6 @@
 ﻿using EntregasADomicilio.Usuarios.Core.Entities;
 using EntregasADomicilio.Usuarios.Core.Interfaces;
 using Google.Cloud.Firestore;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntregasADomicilio.Usuarios.Repositorios.FiresStore.Clientes
 {
@@ -24,17 +18,17 @@ namespace EntregasADomicilio.Usuarios.Repositorios.FiresStore.Clientes
             _firestoreDb = FirestoreDb.Create(projectId);
         }
 
-        public async Task<string> AgregarClienteAsync(Cliente cliente)
+        public async Task AgregarAsync(Cliente cliente)
         {
             CollectionReference collectionReference;
 
             collectionReference = _firestoreDb.Collection(coleccion);
             var data = await collectionReference.AddAsync(cliente);
 
-            return cliente.Id;
+            //return cliente.Id;
         }
 
-        public async Task<Cliente> ObtenerAsync(string id)
+        public async Task<Cliente?> ObtenerAsync(string id)
         {
             Cliente cliente;
             QuerySnapshot querySnapshot;
@@ -45,7 +39,7 @@ namespace EntregasADomicilio.Usuarios.Repositorios.FiresStore.Clientes
             querySnapshot = await query.GetSnapshotAsync();
             cliente = null;
             if (querySnapshot.Count() > 0 && querySnapshot[0].Exists)
-            {                
+            {
                 cliente = querySnapshot[0].ConvertTo<Cliente>();
             }
 

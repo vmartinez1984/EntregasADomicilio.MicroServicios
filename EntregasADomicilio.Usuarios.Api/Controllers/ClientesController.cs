@@ -34,6 +34,8 @@ namespace EntregasADomicilio.Usuarios.Api.Controllers
             TokenDto tokenDto;
 
             tokenDto = await _unitOfWork.Cliente.IniciarSesionAsync(inicioDeSesion);
+            if (tokenDto == null)
+                return NotFound(new { Mensaje = "Contraseña y/o correno incorrectos" });
 
             return Ok(tokenDto);
         }
