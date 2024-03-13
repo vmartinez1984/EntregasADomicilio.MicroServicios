@@ -11,8 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntregasADomicilio.Web.Plat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7CB1D855-7360-46BF-8DDB-9AB11CF0037D}"
 	ProjectSection(SolutionItems) = preProject
-		Dockerfile = Dockerfile
+		.dockerignore = .dockerignore
+		Dockerfile_usuarios.Dockerfile = Dockerfile_usuarios.Dockerfile
 		README.md = README.md
+		web_platillos.Dockerfile = web_platillos.Dockerfile
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntregasADomicilio.AlmacenLocal.Api", "EntregasADomicilio.AlmacenLocal.Api\EntregasADomicilio.AlmacenLocal.Api.csproj", "{7DAC92AF-1CE7-4040-B629-017AF61D3472}"

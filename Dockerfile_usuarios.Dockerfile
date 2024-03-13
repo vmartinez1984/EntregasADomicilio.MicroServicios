@@ -28,3 +28,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "EntregasADomicilio.Usuarios.Api.dll"]
+
+#docker build -t nombre_del_contenedor .
+#docker build -t nombre_del_contenedor dockerfile

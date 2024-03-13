@@ -11,7 +11,7 @@ namespace EntregasADomicilio.Web.Platillos.Repositorios.FireStore.Repositorios
 {
     public class PlatilloRepositorio : IPlatillo
     {
-        string ruta = ".\\entregasadomicilio-7e116.json";
+        string ruta = "entregasadomicilio-7e116.json";
         string projectId;
         FirestoreDb _firestoreDb;
         string coleccion = "platillos";
