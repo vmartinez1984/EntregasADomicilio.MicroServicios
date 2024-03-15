@@ -28,6 +28,7 @@ namespace EntregasADomicilio.Admin.WebData.Core.Entities
         [DataType(DataType.Date)]
         public DateTime FechaDeNacimiento { get; set; }
 
+        public Direccion Direccion { get; set; }
         public virtual List<Direccion> Direcciones { get; set; }
     }
 }

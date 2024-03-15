@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using EntregasADomicilio.Web.Pedidos.Core.Dtos;
 
 namespace EntregasADomicilio.Web.Pedidos.BusinessLayer
 {
     public interface IPedidoBl
     {
-        Task<int> AgregarAsync(PedidoDtoIn pedido, int clienteId);
-        Task<PedidoDto> ObtenerAsync(int pedidoId);
-        Task<List<PedidoDto>> ObtenerTodosPorClienteIdAsync(int clienteId);
+        Task<string> AgregarAsync(PedidoDtoIn pedido, string clienteId);
+        Task<PedidoDto> ObtenerAsync(string pedidoId);
+        Task<List<PedidoDto>> ObtenerTodosPorClienteIdAsync(string clienteId);
     }
 }

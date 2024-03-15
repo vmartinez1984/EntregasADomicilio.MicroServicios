@@ -60,14 +60,20 @@ namespace EntregasADomicilio.Usuarios.Api.Controllers
             return claim.Value;
         }
 
-        [HttpGet("Id")]
-        public async Task<IActionResult> ObtenerId()
+        [HttpGet("{clienteId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ObtenerId(Guid clienteId)
         {
-            string clienteId;
+            //string clienteId;
 
-            clienteId = ObtenerClienteId();
+            //clienteId = ObtenerClienteId();
 
-            return Ok(new { Id = clienteId });
+            //return Ok(new { Id = clienteId });
+            ClienteDto cliente;
+
+            cliente = await _unitOfWork.Cliente.ObtenerAsync(clienteId);
+
+            return Ok(cliente);
         }
 
         [HttpGet]
@@ -75,7 +81,7 @@ namespace EntregasADomicilio.Usuarios.Api.Controllers
         {
             ClienteDto cliente;
 
-            cliente = await _unitOfWork.Cliente.ObtenerAsync(ObtenerClienteId());
+            cliente = await _unitOfWork.Cliente.ObtenerAsync(Guid.Parse( ObtenerClienteId()));
 
             return Ok(cliente);
         }

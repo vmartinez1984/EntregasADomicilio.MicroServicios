@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <!--<Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>-->
+	-->
+    <ImplicitUsings>enable</ImplicitUsings>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
@@ -15,7 +16,12 @@
   <ItemGroup>
     <ProjectReference Include="..\JwtTokenService\JwtTokenService.csproj" />
     <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.BusinessLayer\EntregasADomicilio.Web.Pedidos.BusinessLayer.csproj" />
-    <ProjectReference Include="..\EntregasADomicilio.Web.Usuarios.Repositorio.Sql\EntregasADomicilio.Web.Usuarios.Repositorio.Sql.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="entregasadomicilio-7e116.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

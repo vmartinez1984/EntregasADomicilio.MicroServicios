@@ -1,4 +1,5 @@
-﻿using EntregasADomicilio.Core.Entities;
+﻿using EntregasADomicilio.Web.Pedidos.Core.Entidades;
+using EntregasADomicilio.Web.Pedidos.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace EntregasADomicilio.Web.Pedidos.Repositorios.Sql
@@ -12,7 +13,7 @@ namespace EntregasADomicilio.Web.Pedidos.Repositorios.Sql
             _appDbContext = appDbContext;
         }
 
-        public async Task<int> AgregarAsync(Pedido pedido)
+        public async Task<string> AgregarAsync(Pedido pedido)
         {
             _appDbContext.Pedido.Add(pedido);
             await _appDbContext.SaveChangesAsync();
@@ -20,7 +21,7 @@ namespace EntregasADomicilio.Web.Pedidos.Repositorios.Sql
             return pedido.Id;
         }
 
-        public async Task<Pedido> ObtenerPorIdAsync(int pedidoId)
+        public async Task<Pedido> ObtenerPorIdAsync(string pedidoId)
         {
             return await _appDbContext.Pedido
                 .Include(x => x.ListaDetalleDelPedido)
@@ -29,7 +30,7 @@ namespace EntregasADomicilio.Web.Pedidos.Repositorios.Sql
                 .FirstAsync(x=> x.Id == pedidoId);
         }
 
-        public async Task<List<Pedido>> ObtenerTodosPorClienteIdAsync(int clienteID)
+        public async Task<List<Pedido>> ObtenerTodosPorClienteIdAsync(string clienteID)
         {
             List<Pedido> lista;
 

@@ -28,7 +28,7 @@ namespace EntregasADomicilio.Usuarios.Repositorios.FiresStore.Clientes
             //return cliente.Id;
         }
 
-        public async Task<Cliente?> ObtenerAsync(string id)
+        public async Task<Cliente> ObtenerPorIdAsync(string id)
         {
             Cliente cliente;
             QuerySnapshot querySnapshot;

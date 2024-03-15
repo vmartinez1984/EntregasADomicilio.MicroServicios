@@ -14,7 +14,7 @@ namespace EntregasADomicilio.Core.Entities
         //public virtual Pedido Pedido { get; set; }
 
         [ForeignKey(nameof(Platillo))]
-        public int PlatilloId { get; set; }
+        public string PlatilloId { get; set; }
 
         public virtual Platillo Platillo { get; set; }
 

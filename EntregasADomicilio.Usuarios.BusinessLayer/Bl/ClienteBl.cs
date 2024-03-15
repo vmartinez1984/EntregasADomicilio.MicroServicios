@@ -26,7 +26,7 @@ namespace EntregasADomicilio.Usuarios.BusinessLayer.Bl
         }
 
         public async Task AgregarAsync(UsuarioDtoIn usuario)
-        {           
+        {
             if (usuario.Id == Guid.Empty)
                 usuario.Id = Guid.NewGuid();
             await _inicioDeSesion.AgregarInicioSesionAsync(new InicioDeSesion
@@ -80,10 +80,10 @@ namespace EntregasADomicilio.Usuarios.BusinessLayer.Bl
                 return null;
             usuario = await _usuarioRepositorio.ObtenerPorInicioDeSesionId(id);
             token = _jwtToken.ObtenerToken(
-                usuario.Nombre + usuario.Apellidos, 
+                usuario.Nombre + usuario.Apellidos,
                 usuario.Id.ToString(),
-                usuario.Roles[0], 
-                inicioDeSesion.Correo, 
+                usuario.Roles[0],
+                inicioDeSesion.Correo,
                 fechaDeExpiracion
             );
 
@@ -94,9 +94,42 @@ namespace EntregasADomicilio.Usuarios.BusinessLayer.Bl
             };
         }
 
-        public  Task<ClienteDto> ObtenerAsync(string v)
+        public async Task<ClienteDto> ObtenerAsync(Guid clienteId)
         {
-            throw new NotImplementedException();
+            Cliente cliente;
+            ClienteDto clienteDto;
+
+            cliente = await _clienteRepositorio.ObtenerPorIdAsync(clienteId.ToString());
+            if(cliente == null) 
+                return null;
+            clienteDto = new ClienteDto
+            {
+                Apellidos = cliente.Apellidos,
+                Correo = cliente.Correo,
+                Nombre = cliente.Nombre,
+                Telefono = cliente.Telefono,
+                Id = Guid.Parse(cliente.Id),
+                Direccion = ObtenerDireccion(cliente)
+            };
+
+            return clienteDto;
+        }
+
+        private DireccionDto ObtenerDireccion(Cliente cliente)
+        {
+            Direccion direccion;
+
+            direccion = cliente.Direcciones.Where(x=> x.EsLaPrincipal == true).FirstOrDefault();
+
+            return new DireccionDto
+            {
+                Alcaldia = direccion.Alcaldia,
+                CalleYNumero = direccion.CalleYNumero,
+                Colonia = direccion.Colonia,
+                CoordenadasGps = direccion.CoordenadasGps,
+                Estado = direccion.Estado,
+                Referencia = direccion.Referencia
+            };
         }
     }
 }

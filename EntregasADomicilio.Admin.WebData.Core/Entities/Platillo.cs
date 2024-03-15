@@ -8,7 +8,7 @@ namespace EntregasADomicilio.Core.Entities
     public class Platillo
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public Guid Guid { get; set; } = Guid.NewGuid();

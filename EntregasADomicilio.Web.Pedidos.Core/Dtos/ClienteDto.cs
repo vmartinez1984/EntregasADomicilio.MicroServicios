@@ -1,4 +1,4 @@
-﻿namespace EntregasADomicilio.Usuarios.Core.Dtos
+﻿namespace EntregasADomicilio.Web.Pedidos.Core.Dtos
 {
     public class ClienteDto
     {
@@ -13,6 +13,8 @@
         public string Correo { get; set; }
 
         public DireccionDto Direccion { get; set; }
+
+        public DateTime FechaDeNacimiento { get; set; }
     }
 
     public class DireccionDto
@@ -28,6 +30,8 @@
         public string Alcaldia { get; set; }
 
         public string Estado { get; set; }
+
+        public string CodigoPostal { get; set; }        
     }
 
 }

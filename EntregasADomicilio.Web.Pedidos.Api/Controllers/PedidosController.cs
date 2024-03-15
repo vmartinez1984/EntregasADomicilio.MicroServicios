@@ -1,10 +1,7 @@
 ﻿using EntregasADomicilio.Web.Pedidos.BusinessLayer;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using EntregasADomicilio.Web.Pedidos.Core.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
 {
@@ -35,14 +32,16 @@ namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
         [HttpPost("clientes/{clienteId}")]
         [ProducesResponseType(typeof(IdDto), 202)]
         [Produces("application/json")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
-        public async Task<IActionResult> AgregarPedido(PedidoDtoIn pedido, int clienteId)
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
+        [AllowAnonymous]
+        public async Task<IActionResult> AgregarPedido(PedidoDtoIn pedido, string clienteId)
         {
-            int id;            
-                        
-            var clienteID = ObtenerClienteId();
+            string id;
+
+            //var clienteID = ObtenerClienteId();
             id = await _unitOfWork.AgregarAsync(pedido, clienteId);
-            return Created($"Pedidos/{id}", new IdDto { Guid = pedido.Guid, Id = id});
+
+            return Created($"Pedidos/{id}", new IdDto { Guid = pedido.Id });
         }
 
         /// <summary>
@@ -67,7 +66,7 @@ namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
         [HttpGet("{pedidoId}")]
         [ProducesResponseType(typeof(PedidoDto), 200)]
         [Produces("application/json")]
-        public async Task<IActionResult> ObtenerPedido(int pedidoId)
+        public async Task<IActionResult> ObtenerPedido(string pedidoId)
         {
             PedidoDto pedido;
 
@@ -75,15 +74,15 @@ namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
 
             return Ok(pedido);
         }
-                
+
         /// <summary>
         /// Obtiene la lista de pedidos del cliente
         /// </summary>
         /// <returns></returns>
         [HttpGet("clientes/{clienteId}")]
         [ProducesResponseType(typeof(PedidoDto), 200)]
-        [Produces("application/json")]        
-        public async Task<IActionResult> ObtenerTodos(int clienteId)
+        [Produces("application/json")]
+        public async Task<IActionResult> ObtenerTodos(string clienteId)
         {
             List<PedidoDto> pedidos;
 

@@ -34,5 +34,6 @@ namespace EntregasADomicilio.Admin.WebData.Core.Entities
         public string Longitud { get; set; }
 
         public int Orden { get; set; } = 1;
+        public string CoordenadasGps { get; set; }
     }
 }

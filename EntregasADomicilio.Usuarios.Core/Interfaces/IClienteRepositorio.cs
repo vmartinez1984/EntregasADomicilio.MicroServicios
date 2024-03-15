@@ -10,5 +10,6 @@ namespace EntregasADomicilio.Usuarios.Core.Interfaces
     public interface IClienteRepositorio
     {
         Task AgregarAsync(Cliente cliente);
+        Task<Cliente> ObtenerPorIdAsync(string clienteId);
     }
 }

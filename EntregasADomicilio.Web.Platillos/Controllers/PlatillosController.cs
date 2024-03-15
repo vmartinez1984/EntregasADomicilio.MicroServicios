@@ -25,6 +25,16 @@ namespace EntregasADomicilio.Web.Platillos.Controllers
             return Ok(platilloDtos);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            PlatilloDto platilloDtos;
+
+            platilloDtos = await _unitOfWorkBl.Platillo.ObtenerPorId(id);
+
+            return Ok(platilloDtos);
+        }
+
         /// <summary>
         /// Obtiene la imagen del platillo por id
         /// </summary>
@@ -36,7 +46,7 @@ namespace EntregasADomicilio.Web.Platillos.Controllers
 
             bytes = await _unitOfWorkBl.Platillo.ObtenerBytesAsync(platilloId);
 
-            return File(bytes, "image/png");            
+            return File(bytes, "image/png");
         }
     }
 }

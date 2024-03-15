@@ -59,5 +59,16 @@ namespace EntregasADomicilio.Web.Platillos.BusinessLayer.Bl
 
             return platilloDtos;
         }
+
+        public async Task<PlatilloDto> ObtenerPorId(string id)
+        {
+            PlatilloDto platilloDtos;
+            Platillo platillos;
+
+            platillos = await _repositorio.Platillo.ObtenerPorIdAsync(id);
+            platilloDtos = _mapper.Map<PlatilloDto>(platillos);
+
+            return platilloDtos;
+        }
     }
 }

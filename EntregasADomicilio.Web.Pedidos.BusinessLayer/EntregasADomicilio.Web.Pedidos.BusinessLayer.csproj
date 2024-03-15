@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <!--<ImplicitUsings>enable</ImplicitUsings>
+	<ImplicitUsings>enable</ImplicitUsings>
+    <!--
     <Nullable>enable</Nullable>-->
   </PropertyGroup>
 
@@ -11,8 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregasADomicilio.Admin.WebData.Core\EntregasADomicilio.Core.csproj" />
-    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Repositorios.Sql\EntregasADomicilio.Web.Pedidos.Repositorios.Sql.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Clientes.Servicios\EntregasADomicilio.Web.Pedidos.Clientes.Servicios.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Core\EntregasADomicilio.Web.Pedidos.Core.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Platillos.Servicios\EntregasADomicilio.Web.Pedidos.Platillos.Servicios.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Servicios\EntregasADomicilio.Web.Pedidos.Servicios.csproj" />
   </ItemGroup>
 
 </Project>

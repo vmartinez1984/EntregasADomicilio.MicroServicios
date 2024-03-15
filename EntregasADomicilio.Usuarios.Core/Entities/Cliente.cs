@@ -23,7 +23,7 @@ namespace EntregasADomicilio.Usuarios.Core.Entities
         [FirestoreProperty]
         public  string Telefono { get; set; }
 
-        [FirestoreProperty]
+        [FirestoreProperty("Direccion")]
         public List<Direccion> Direcciones { get; set; }
     }
 

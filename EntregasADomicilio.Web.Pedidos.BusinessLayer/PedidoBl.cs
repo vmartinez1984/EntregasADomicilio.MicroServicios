@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using EntregasADomicilio.Core.Constants;
-using EntregasADomicilio.Core.Entities;
-using EntregasADomicilio.Web.Pedidos.Repositorios.Sql;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using EntregasADomicilio.Web.Pedidos.Clientes.Servicios;
+using EntregasADomicilio.Web.Pedidos.Platillos.Servicios;
+using EntregasADomicilio.Web.Pedidos.Core.Interfaces;
+using EntregasADomicilio.Web.Pedidos.Core.Entidades;
+using EntregasADomicilio.Web.Pedidos.Core.Dtos;
+using EntregasADomicilio.Web.Pedidos.Core.Constantes;
 
 
 namespace EntregasADomicilio.Web.Pedidos.BusinessLayer
@@ -14,51 +13,84 @@ namespace EntregasADomicilio.Web.Pedidos.BusinessLayer
     {
         public readonly IPedidoRepositorio _repositorySql;
         public readonly IMapper _mapper;
+        private readonly ClienteServicio _clienteServicio;
+        private readonly PlatilloServicio _platilloServicio;
 
-        public PedidoBl(IPedidoRepositorio repositorySql, IMapper mapper)
+        public PedidoBl(
+            IPedidoRepositorio repositorySql,
+            IMapper mapper,
+            ClienteServicio clienteServicio,
+            PlatilloServicio platilloServicio
+        )
         {
             _repositorySql = repositorySql;
             _mapper = mapper;
+            _clienteServicio = clienteServicio;
+            _platilloServicio = platilloServicio;
         }
 
-        public async Task<int> AgregarAsync(PedidoDtoIn pedidoDto, int clienteId)
+        public async Task<string> AgregarAsync(PedidoDtoIn pedidoDto, string clienteId)
         {
+            ClienteDto cliente;
             Pedido pedido;
 
+            cliente = await _clienteServicio.ObtenerCliente(clienteId);
             pedido = new Pedido
             {
-                ClienteId = clienteId,
+                Cliente = new Cliente
+                {
+                    Id = clienteId,
+                    Apellidos = cliente.Apellidos,
+                    Correo = cliente.Correo,
+                    Nombre = cliente.Nombre,
+                    Telefono = cliente.Telefono,
+                    //FechaDeNacimiento = cliente.FechaDeNacimiento,
+                    Direccion = new Direccion
+                    {
+                        Alcaldia = cliente.Direccion.Alcaldia,
+                        CalleYNumero = cliente.Direccion.CalleYNumero,
+                        CodigoPostal = cliente.Direccion.CodigoPostal,
+                        Estado = cliente.Direccion.Estado,
+                        Referencias = cliente.Direccion.Referencia,
+                        CoordenadasGps = cliente.Direccion.CoordenadasGps
+                    }
+                },
                 Comentario = pedidoDto.Comentario,
                 Estatus = EstatusDelPedido.PedidoRealizado,
-                ListaDetalleDelPedido = ObtenerListaDeDetalleDelPedido(pedidoDto.ListaDetalleDelPedido),
-                Total = pedidoDto.ListaDetalleDelPedido.Sum(x => x.Precio), 
-                FechaDeRegistro = DateTime.Now,
-                Guid = pedidoDto.Guid
+                FechaDeRegistro = System.DateTime.Now,
+                Id = pedidoDto.Id.ToString(),
+                Platillos = await ObtenerPlatillos(pedidoDto.Platillos),
+                Total = (double)pedidoDto.Platillos.Sum(x => x.Precio)
             };
-
             await _repositorySql.AgregarAsync(pedido);
 
             return pedido.Id;
         }
 
-        private List<DetalleDelPedido> ObtenerListaDeDetalleDelPedido(List<PlatilloDtoIn> listaDetalleDelPedido)
+        private async Task<List<Platillo>> ObtenerPlatillos(List<PlatilloDtoIn> listaDetalleDelPedido)
         {
-            List<DetalleDelPedido> lista;
+            List<Platillo> platillos;
 
-            lista = new List<DetalleDelPedido>();
+            platillos = new List<Platillo>();
             foreach (var item in listaDetalleDelPedido)
             {
-                lista.Add(new DetalleDelPedido
+                PlatilloDto platillo;
+
+                platillo = await _platilloServicio.ObtenerPorId(item.Id);
+
+                platillos.Add(new Platillo
                 {
-                    PlatilloId = item.PlatilloId,
-                    Precio = item.Precio
-                });
+                    Id = platillo.Id.ToString(),
+                    Nombre = platillo.Nombre,
+                    Descripcion = platillo.Descripcion,
+                    Precio = (double)item.Precio
+                }); ;
             }
 
-            return lista;
+            return platillos;
         }
 
-        public async Task<PedidoDto> ObtenerAsync(int pedidoId)
+        public async Task<PedidoDto> ObtenerAsync(string pedidoId)
         {
             Pedido pedido;
             PedidoDto pedidoDto;
@@ -69,7 +101,7 @@ namespace EntregasADomicilio.Web.Pedidos.BusinessLayer
             return pedidoDto;
         }
 
-        public async Task<List<PedidoDto>> ObtenerTodosPorClienteIdAsync(int clienteID)
+        public async Task<List<PedidoDto>> ObtenerTodosPorClienteIdAsync(string clienteID)
         {
             List<PedidoDto> pedidosDtos;
             List<Pedido> pedidos;

@@ -46,10 +46,7 @@ namespace EntregasADomicilio.Admin.WebData.Core.Dtos.Web
         public string CodigoPostal { get; set; }
 
         [MaxLength(25)]
-        public string? Latitud { get; set; }
-
-        [MaxLength(25)]
-        public string? Longitud { get; set; }
+        public string CoordenadasGps { get; set; }
     }
 
     public class ClienteDtoIn
