@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "EntregasADomicilio.Usuarios.Api": {
+    "EntregasADomicilio.Web.Platillos.Api.V2": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7096;http://localhost:5208"
+      "applicationUrl": "https://localhost:7007;http://localhost:5165"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -27,16 +27,6 @@
       },
       "publishAllPorts": true,
       "useSSL": true
-    },
-    "Container (.NET SDK)": {
-      "commandName": "SdkContainer",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "environmentVariables": {
-        "ASPNETCORE_URLS": "https://+:443;http://+:80"
-      },
-      "publishAllPorts": true,
-      "useSSL": true
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
@@ -44,8 +34,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:51658",
-      "sslPort": 44396
+      "applicationUrl": "http://localhost:1640",
+      "sslPort": 44395
     }
   }
 }

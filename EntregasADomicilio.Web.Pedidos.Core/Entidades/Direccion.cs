@@ -4,10 +4,7 @@ namespace EntregasADomicilio.Web.Pedidos.Core.Entidades
 {
     [FirestoreData]
     public class Direccion
-    {
-        [FirestoreProperty]
-        public int UsuarioId { get; set; }
-
+    {       
         [FirestoreProperty]
         public string CalleYNumero { get; set; }
 

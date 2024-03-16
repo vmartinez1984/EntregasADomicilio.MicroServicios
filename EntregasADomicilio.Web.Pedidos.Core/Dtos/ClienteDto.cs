@@ -14,7 +14,7 @@
 
         public DireccionDto Direccion { get; set; }
 
-        public DateTime FechaDeNacimiento { get; set; }
+        //public DateTime FechaDeNacimiento { get; set; }
     }
 
     public class DireccionDto

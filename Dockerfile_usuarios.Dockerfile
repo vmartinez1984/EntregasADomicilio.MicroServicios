@@ -6,7 +6,6 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["EntregasADomicilio.Usuarios.Api/EntregasADomicilio.Usuarios.Api.csproj", "EntregasADomicilio.Usuarios.Api/"]
 COPY ["EntregasADomicilio.Usuarios.BusinessLayer/EntregasADomicilio.Usuarios.BusinessLayer.csproj", "EntregasADomicilio.Usuarios.BusinessLayer/"]
@@ -21,7 +20,6 @@ WORKDIR "/src/EntregasADomicilio.Usuarios.Api"
 RUN dotnet build "./EntregasADomicilio.Usuarios.Api.csproj" -c runtime -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./EntregasADomicilio.Usuarios.Api.csproj" -c runtime -o /app/publish /p:UseAppHost=false
 
 FROM base AS final

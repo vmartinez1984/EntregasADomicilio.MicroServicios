@@ -2,7 +2,7 @@
 using EntregasADomicilio.Web.Pedidos.Core.Interfaces;
 using Google.Cloud.Firestore;
 
-namespace EntregasADomicilio.Web.Pedidos.Servicios.Repositorios
+namespace EntregasADomicilio.Web.Pedidos.Repositorios.Firestore
 {
     public class PedidoRepositorio : IPedidoRepositorio
     {

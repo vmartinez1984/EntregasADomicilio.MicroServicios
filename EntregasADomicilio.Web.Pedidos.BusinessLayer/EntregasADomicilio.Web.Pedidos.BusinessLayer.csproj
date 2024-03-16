@@ -12,10 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Clientes.Servicios\EntregasADomicilio.Web.Pedidos.Clientes.Servicios.csproj" />
     <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Core\EntregasADomicilio.Web.Pedidos.Core.csproj" />
-    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Platillos.Servicios\EntregasADomicilio.Web.Pedidos.Platillos.Servicios.csproj" />
-    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Servicios\EntregasADomicilio.Web.Pedidos.Servicios.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Platillos.Servicios\EntregasADomicilio.Web.Pedidos.Servicios.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Web.Pedidos.Servicios\EntregasADomicilio.Web.Pedidos.Repositorios.Firestore.csproj" />
+    <ProjectReference Include="..\JwtTokenService\JwtTokenService.csproj" />
   </ItemGroup>
 
 </Project>

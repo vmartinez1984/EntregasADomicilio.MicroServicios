@@ -81,8 +81,8 @@ namespace EntregasADomicilio.Usuarios.BusinessLayer.Bl
             usuario = await _usuarioRepositorio.ObtenerPorInicioDeSesionId(id);
             token = _jwtToken.ObtenerToken(
                 usuario.Nombre + usuario.Apellidos,
-                usuario.Id.ToString(),
                 usuario.Roles[0],
+                usuario.Id.ToString(),
                 inicioDeSesion.Correo,
                 fechaDeExpiracion
             );
@@ -128,7 +128,8 @@ namespace EntregasADomicilio.Usuarios.BusinessLayer.Bl
                 Colonia = direccion.Colonia,
                 CoordenadasGps = direccion.CoordenadasGps,
                 Estado = direccion.Estado,
-                Referencia = direccion.Referencia
+                Referencia = direccion.Referencia,
+                CodigoPostal = direccion.CodigoPostal
             };
         }
     }

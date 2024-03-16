@@ -1,35 +1,34 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.Net.Http;
-using EntregasADomicilio.Web.Pedidos.Core.Dtos;
+﻿using EntregasADomicilio.Web.Pedidos.Core.Dtos;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace EntregasADomicilio.Web.Pedidos.Servicios.Ws
 {
-    public class PlatilloServicio
+    public class ClienteServicio
     {
         public readonly IHttpClientFactory _httpClientFactory;
         private readonly string _url;
 
-        public PlatilloServicio(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public ClienteServicio(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
-            _url = configuration["PlatillosServicio"] + "Platillos/";
+            _url = configuration["UsuariosServicio"] + "Clientes/";
         }
 
-        public async Task<PlatilloDto> ObtenerPorId(string id)
+        public async Task<ClienteDto> ObtenerCliente(string clienteId)
         {
-            PlatilloDto cliente;
+            ClienteDto cliente;
             HttpClient client;
             HttpRequestMessage request;
             HttpResponseMessage response;
             // https://localhost:44395/api/Clientes/638e95d4-5243-4434-87e7-3b1b85747c09
 
             client = _httpClientFactory.CreateClient();
-            request = new HttpRequestMessage(HttpMethod.Get, _url + id);
+            request = new HttpRequestMessage(HttpMethod.Get, _url + clienteId);
             response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                cliente = JsonConvert.DeserializeObject<PlatilloDto>(await response.Content.ReadAsStringAsync());
+                cliente = JsonConvert.DeserializeObject<ClienteDto>(await response.Content.ReadAsStringAsync());
             }
             else
             {
@@ -38,6 +37,5 @@ namespace EntregasADomicilio.Web.Pedidos.Servicios.Ws
 
             return cliente;
         }
-
     }
 }

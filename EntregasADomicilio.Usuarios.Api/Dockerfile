@@ -6,7 +6,8 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-ARG BUILD_CONFIGURATION=Release
+#ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=runtime
 WORKDIR /src
 COPY ["/EntregasADomicilio.Usuarios.Api/EntregasADomicilio.Usuarios.Api.csproj", "/EntregasADomicilio.Usuarios.Api/"]
 COPY ["EntregasADomicilio.Usuarios.BusinessLayer/EntregasADomicilio.Usuarios.BusinessLayer.csproj", "EntregasADomicilio.Usuarios.BusinessLayer/"]
@@ -21,21 +22,11 @@ WORKDIR "/src/EntregasADomicilio.Usuarios.Api"
 RUN dotnet build "./EntregasADomicilio.Usuarios.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
+#ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=runtime
 RUN dotnet publish "./EntregasADomicilio.Usuarios.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "EntregasADomicilio.Usuarios.Api.dll"]
-
-#FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine as build
-#WORKDIR /app
-#COPY . .
-#RUN dotnet restore
-#RUN dotnet publish -o /app/published-app
-#
-#FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine as runtime
-#WORKDIR /app
-#COPY --from=build /app/published-app /app
-#ENTRYPOINT [ "dotnet", "/app/EntregasADomicilio.Usuarios.Api.dll" ]

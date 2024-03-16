@@ -30,8 +30,9 @@ namespace EntregasADomicilio.Web.Usuarios.BusinessLayer.Helpers
             services.AddScoped<IRepositorio, RepositorioU>();
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
             services.AddScoped<IDireccionRepositorio, DireccionRepositorio>();
-            services.AddSingleton<JwtToken>();
             services.AddPedidoRepositorio();
+
+            services.AddSingleton<JwtToken>();
 
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorioNoSql>();
             //services.AddIdentity<IdentityUser, IdentityRole>()

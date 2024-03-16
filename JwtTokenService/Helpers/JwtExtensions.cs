@@ -9,9 +9,7 @@ namespace JwtTokenService.Helpers
     public static class JwtExtensions
     {        
         public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddSingleton<JwtToken>();
-            
+        {               
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

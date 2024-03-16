@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using EntregasADomicilio.Web.Pedidos.Clientes.Servicios;
-using EntregasADomicilio.Web.Pedidos.Platillos.Servicios;
+using EntregasADomicilio.Web.Pedidos.Servicios.Ws;
 using EntregasADomicilio.Web.Pedidos.Core.Interfaces;
 using EntregasADomicilio.Web.Pedidos.Core.Entidades;
 using EntregasADomicilio.Web.Pedidos.Core.Dtos;

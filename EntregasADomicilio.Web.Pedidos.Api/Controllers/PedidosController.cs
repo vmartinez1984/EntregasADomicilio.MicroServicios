@@ -1,5 +1,6 @@
 ﻿using EntregasADomicilio.Web.Pedidos.BusinessLayer;
 using EntregasADomicilio.Web.Pedidos.Core.Dtos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,13 +33,13 @@ namespace EntregasADomicilio.Web.Pedidos.Api.Controllers
         [HttpPost("clientes/{clienteId}")]
         [ProducesResponseType(typeof(IdDto), 202)]
         [Produces("application/json")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
-        [AllowAnonymous]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
+        //[AllowAnonymous]
         public async Task<IActionResult> AgregarPedido(PedidoDtoIn pedido, string clienteId)
         {
             string id;
 
-            //var clienteID = ObtenerClienteId();
+            var clienteID = ObtenerClienteId();
             id = await _unitOfWork.AgregarAsync(pedido, clienteId);
 
             return Created($"Pedidos/{id}", new IdDto { Guid = pedido.Id });

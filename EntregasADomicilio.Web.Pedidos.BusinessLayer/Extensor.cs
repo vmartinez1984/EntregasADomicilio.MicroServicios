@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
-using EntregasADomicilio.Web.Pedidos.Clientes.Servicios;
-using EntregasADomicilio.Web.Pedidos.Platillos.Servicios;
-using EntregasADomicilio.Web.Pedidos.Servicios.Repositorios;
+using EntregasADomicilio.Web.Pedidos.Servicios.Ws;
+using EntregasADomicilio.Web.Pedidos.Repositorios.Firestore;
 using EntregasADomicilio.Web.Pedidos.Core.Interfaces;
+using JwtTokenService;
 
 namespace EntregasADomicilio.Web.Pedidos.BusinessLayer
 {
