@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  entregasadomicilio.web.platillos.api.v2:
+    image: ${DOCKER_REGISTRY-}entregasadomiciliowebplatillosapiv2
+    build:
+      context: .
+      dockerfile: EntregasADomicilio.Web.Platillos.Api.V2/Dockerfile
+
+  entregasadomicilio.web.pedidos.api:
+    image: ${DOCKER_REGISTRY-}entregasadomiciliowebpedidosapi
+    build:
+      context: .
+      dockerfile: EntregasADomicilio.Web.Pedidos.Api/Dockerfile
+
+
+  entregasadomicilio.usuarios.api:
+    image: ${DOCKER_REGISTRY-}entregasadomiciliousuariosapi
+    build:
+      context: .
+      dockerfile: EntregasADomicilio.Usuarios.Api/Dockerfile
+

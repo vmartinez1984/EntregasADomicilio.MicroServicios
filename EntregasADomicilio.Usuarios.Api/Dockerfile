@@ -9,7 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 #ARG BUILD_CONFIGURATION=Release
 ARG BUILD_CONFIGURATION=runtime
 WORKDIR /src
-COPY ["/EntregasADomicilio.Usuarios.Api/EntregasADomicilio.Usuarios.Api.csproj", "/EntregasADomicilio.Usuarios.Api/"]
+COPY ["EntregasADomicilio.Usuarios.Api/EntregasADomicilio.Usuarios.Api.csproj", "EntregasADomicilio.Usuarios.Api/"]
 COPY ["EntregasADomicilio.Usuarios.BusinessLayer/EntregasADomicilio.Usuarios.BusinessLayer.csproj", "EntregasADomicilio.Usuarios.BusinessLayer/"]
 COPY ["EntregasADomicilio.Usuarios.Core/EntregasADomicilio.Usuarios.Core.csproj", "EntregasADomicilio.Usuarios.Core/"]
 COPY ["EntregasADomicilio.Clientes.Repositorios.FiresStore/EntregasADomicilio.Usuarios.Repositorios.Firestore.Clientes.csproj", "EntregasADomicilio.Clientes.Repositorios.FiresStore/"]

@@ -8,6 +8,7 @@
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <UserSecretsId>23ee0ccc-4120-427f-8f00-9346577b469e</UserSecretsId>
 	  <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	  <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +24,7 @@
 
   <ItemGroup>
     <Content Update="entregasadomicilio-7e116.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
