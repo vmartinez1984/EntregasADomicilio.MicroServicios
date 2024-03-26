@@ -70,6 +70,7 @@ namespace EntregasADomicilio.Admin.Api.Controllers
         {
             string id;
             bool existe;
+            PlatilloDto platilloDto;
 
             existe = await _unitOfWork.Categoria.ExisteAsync(platillo.Categoria);
             if (!existe)
@@ -77,6 +78,12 @@ namespace EntregasADomicilio.Admin.Api.Controllers
                 this.ModelState.AddModelError(nameof(PlatilloDtoIn.Categoria), "No existe la categoria");
 
                 return BadRequest();
+            }
+            if (platillo.Id is not null)
+            {
+                platilloDto = await _unitOfWork.Platillo.ObtenerPorId((Guid)platillo.Id);
+                if (platilloDto is not null)
+                    return Ok(platilloDto);
             }
             id = await _unitOfWork.Platillo.AgregarAsync(platillo);
 
@@ -89,7 +96,7 @@ namespace EntregasADomicilio.Admin.Api.Controllers
         /// <param name="id"></param>
         /// <param name="platillo"></param>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromForm] PlatilloDtoIn platillo)
+        public async Task<IActionResult> Put(Guid id, [FromForm] PlatilloDtoUpdate platillo)
         {
             await _unitOfWork.Platillo.ActualizarAsync(id, platillo);
 

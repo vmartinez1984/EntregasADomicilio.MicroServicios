@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EntregasADomicilio.Admin.BusinessLayer.Dtos
 {
@@ -13,10 +15,12 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Dtos
 
     public class CategoriaDtoIn
     {
+        [Required, MinLength(5), MaxLength(50)]
+        [DefaultValue("")]
         public string Nombre { get; set; }
 
         public bool EstaActivo { get; set; } = true;
-
+                
         public Guid Id { get; set; } = Guid.NewGuid();
     }
 

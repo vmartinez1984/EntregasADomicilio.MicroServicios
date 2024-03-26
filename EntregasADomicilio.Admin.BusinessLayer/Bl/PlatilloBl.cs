@@ -58,18 +58,11 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Bl
         public async Task<string> AgregarAsync(PlatilloDtoIn platillo)
         {
             Platillo entity;
-            string aliasDelArchivo;
 
-            if(platillo.Id == Guid.Empty || platillo.Id == null)
+            if (platillo.Id == Guid.Empty || platillo.Id == null)
                 platillo.Id = Guid.NewGuid();
-            //aliasDelArchivo = $"{platillo.Id}{Path.GetExtension(platillo.FormFile.FileName)}";
-            //Archivo archivoVMtz = await GuardarEnAlamcenVMtz(platillo, aliasDelArchivo, AlmacenDeArchivos.AlmacenVMtz);
-            //Archivo archivoS3 = await GuardarEnAlamcenVMtz(platillo, aliasDelArchivo, AlmacenDeArchivos.MinioS3);
-            //Archivo archivoFireStore = await GuardarEnAlamcenVMtz(platillo, aliasDelArchivo, AlmacenDeArchivos.FirebaseStorage);
-
             entity = _mapper.Map<Platillo>(platillo);
             entity.ListaDeArchivos = await ObtenerListaDeArchivosAsync(platillo);
-
             await _repositorySql.Platillo.AgregarAsync(entity);
 
             return entity.Id;
@@ -240,12 +233,26 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Bl
             return await ObtenerBytesDeAlmacenAsync(platillo.ListaDeArchivos, AlmacenDeArchivos.FirebaseStorage);
         }
 
-        public async Task ActualizarAsync(Guid id, PlatilloDtoIn platillo)
+        public async Task ActualizarAsync(Guid id, PlatilloDtoUpdate platillo)
         {
             Platillo platilloEntity;
 
             platilloEntity = await _repositorySql.Platillo.ObtenerPorIdAsync(id.ToString());
             platilloEntity = _mapper.Map(platillo, platilloEntity);
+            if(platillo.FormFile is not null)
+            {
+                Archivo archivo;
+
+                archivo = platilloEntity.ListaDeArchivos
+                    .Where(x => x.NombreDelAlmacen == AlmacenDeArchivos.FirebaseStorage)
+                    .FirstOrDefault();
+                archivo.RutaDelArchivo =
+                await _almacenadorDeArchivosFirebaseStorage.EditarArchivo(
+                    _contenedor,
+                    archivo.AliasDelArchivo,
+                    platillo.FormFile
+                );
+            }
 
             await _repositorySql.Platillo.ActualizarAsync(platilloEntity);
         }

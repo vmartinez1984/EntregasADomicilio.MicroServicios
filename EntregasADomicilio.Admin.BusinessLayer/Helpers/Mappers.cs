@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EntregasADomicilio.Admin.BusinessLayer.Dtos;
 using EntregasADomicilio.Admin.Platillos.Core.Entidades;
-using System;
 
 namespace EntregasADomicilio.Admin.BusinessLayer.Helpers
 {
@@ -17,6 +16,7 @@ namespace EntregasADomicilio.Admin.BusinessLayer.Helpers
                 .ForMember(platillo => platillo.Id, platilloDto => platilloDto.MapFrom(x=>x.Id.ToString()));
             CreateMap<Platillo, PlatilloDto>();
                 //.ForMember(platilloDto => platilloDto.Id);
+            CreateMap<PlatilloDtoUpdate, Platillo>();
         }
     }
 }

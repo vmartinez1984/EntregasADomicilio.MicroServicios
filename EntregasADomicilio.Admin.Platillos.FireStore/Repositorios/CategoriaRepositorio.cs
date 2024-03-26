@@ -12,7 +12,7 @@ namespace EntregasADomicilio.Admin.Platillos.FireStore.Repositorios
 {
     public class CategoriaRepositorio : ICategoriaRepositorio
     {
-        string ruta = ".\\entregasadomicilio-7e116.json";
+        string ruta = "entregasadomicilio-7e116.json";
         string projectId;
         FirestoreDb _firestoreDb;
         string coleccion = "categorias";
@@ -104,7 +104,11 @@ namespace EntregasADomicilio.Admin.Platillos.FireStore.Repositorios
             Filter filter = Filter.EqualTo(nameof(Categoria.Nombre), categoria);
             Query query = _firestoreDb.Collection(coleccion).Where(filter);            
             QuerySnapshot documentSnapshots = await query.GetSnapshotAsync();
-
+            if(documentSnapshots.Count == 0)
+            {
+                query = _firestoreDb.Collection(coleccion).Where(Filter.EqualTo(nameof(Categoria.Id), categoria));
+                documentSnapshots = await query.GetSnapshotAsync();
+            }
             return documentSnapshots[0].Exists;
         }
     }

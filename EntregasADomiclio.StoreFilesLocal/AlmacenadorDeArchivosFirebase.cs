@@ -3,6 +3,7 @@ using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Firebase.Storage;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 
 namespace EntregasADomicilio.StoreFiles
 {
@@ -15,30 +16,45 @@ namespace EntregasADomicilio.StoreFiles
         string token;
         string rutaDelStorage = "archivos-54624.appspot.com";
 
-        public Task Borrar(string ruta, string contenedor)
+        public async Task Borrar(string contenedor, string nombre)
         {
-            throw new NotImplementedException();
+            await ObtenerToken();
+            await new FirebaseStorage(
+                    rutaDelStorage,
+                    new FirebaseStorageOptions{
+                        AuthTokenAsyncFactory = () => Task.FromResult(token),
+                        ThrowOnCancel = true
+                    }
+                )
+                .Child(contenedor)
+                .Child(nombre)
+                .DeleteAsync();
         }
 
-        public Task<string> EditarArchivo(string ruta, string contenedor, string extension, byte[] bytesDelArchivo)
+        public async Task<string> EditarArchivo(string contenedor, string nombre, IFormFile formFile)
         {
-            throw new NotImplementedException();
+            string url;
+
+            await Borrar(contenedor, nombre);
+            url = await Guardar(contenedor,nombre, formFile);
+
+            return url;
         }
 
         public async Task<string> Guardar(string contenedor, string nombre, IFormFile formFile)
         {
             await ObtenerToken();       
-            var downloadURL = await new Firebase.Storage.FirebaseStorage(
-                rutaDelStorage,
-                new FirebaseStorageOptions
-                {
-                    AuthTokenAsyncFactory = () => Task.FromResult(token),
-                    ThrowOnCancel = true
-                })
+            var downloadURL = await new FirebaseStorage(
+                    rutaDelStorage,
+                    new FirebaseStorageOptions
+                    {
+                        AuthTokenAsyncFactory = () => Task.FromResult(token),
+                        ThrowOnCancel = true
+                    }
+                )
                 .Child(contenedor)
                 .Child(nombre)                
-                .PutAsync(formFile.OpenReadStream()
-            );
+                .PutAsync(formFile.OpenReadStream());
 
             return downloadURL;            
         }

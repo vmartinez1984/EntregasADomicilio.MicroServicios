@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregasADomicilio.V4\EntregasADomicilio.Admin.Platillos.Core\EntregasADomicilio.Admin.Platillos.Core.csproj" />
+    <ProjectReference Include="..\EntregasADomicilio.Admin.Platillos.Core\EntregasADomicilio.Admin.Platillos.Core.csproj" />
   </ItemGroup>
 
 </Project>
