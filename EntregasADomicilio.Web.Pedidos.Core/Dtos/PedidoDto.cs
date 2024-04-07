@@ -13,14 +13,14 @@ namespace EntregasADomicilio.Web.Pedidos.Core.Dtos
         //public DireccionDtoIn Direccion { get; set; }
         [Required]
         public List<PlatilloDtoIn> Platillos { get; set; }
-        public string Comentario { get; set; }        
+        public string Comentario { get; set; }
     }
 
     public class PedidoDto
     {
         public Guid Id { get; set; }
 
-        public List<PlatilloDto> ListaDetalleDelPedido { get; set; }
+        public List<PlatilloDto> Platillos { get; set; }
 
         public string Comentario { get; set; }
 
@@ -54,7 +54,7 @@ namespace EntregasADomicilio.Web.Pedidos.Core.Dtos
 
         //public string Descripcion { get; set; }
 
-        [Required]
+        [Required, Range(1, 300)]
         public decimal Precio { get; set; }
 
         public string Comentario { get; set; }

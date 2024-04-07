@@ -10,8 +10,6 @@ namespace EntregasADomicilio.Web.Pedidos.Core.Dtos
     {
         public Guid Id { get; set; }
 
-        public string Categoria { get; set; }
-
         public string Nombre { get; set; }
 
         public string Descripcion { get; set; }

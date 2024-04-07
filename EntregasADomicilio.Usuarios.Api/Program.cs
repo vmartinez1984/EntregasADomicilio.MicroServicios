@@ -1,5 +1,7 @@
 using EntregasADomicilio.Usuarios.BusinessLayer.Helpers;
 using JwtTokenService.Helpers;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,15 +12,23 @@ builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(gen =>
+{
+    gen.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Administración de usuarios Api",
+        Version = "1.0",
+        Description = "Api de administración de usuarios"
+    });
+
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    gen.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
 
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        //string frontEndUrl;
-
-        //colocar la url en una variable uqe se lea desde appsetiings
         builder.WithOrigins("*")
         .AllowAnyMethod()
         .AllowAnyHeader()

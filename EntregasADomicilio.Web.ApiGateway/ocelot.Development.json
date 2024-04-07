@@ -4,6 +4,18 @@
   },
   "Routes": [
     {
+      "UpstreamPathTemplate": "/gateway/codigosPostales/aleatorio",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/v2/index.php/CodigosPostales/aleatorio",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "codigospostalex.000webhostapp.com"
+          //"Port": 80
+        }
+      ]
+    },
+    {
       "UpstreamPathTemplate": "/gateway/categorias",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/WebPlatillos/api/Categorias",
@@ -26,7 +38,7 @@
           "Port": 8013
         }
       ]
-    }//,
+    } //,
     //{
     //  "UpstreamPathTemplate": "/gateway/inicioDeSesion",
     //  "UpstreamHttpMethod": [ "Post" ],

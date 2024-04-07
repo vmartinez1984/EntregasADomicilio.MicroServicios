@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregasADomicilio.Admin.WebData.Core\EntregasADomicilio.Core.csproj" />
     <ProjectReference Include="..\EntregasADomicilio.Admin.WebData.Repository.Sql\EntregasADomicilio.Admin.WebData.Repositorio.Sql.csproj" />
   </ItemGroup>
 

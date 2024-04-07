@@ -4,14 +4,26 @@
   },
   "Routes": [
     {
+      "UpstreamPathTemplate": "/gateway/codigosPostales/aleatorio",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/v2/index.php/CodigosPostales/aleatorio",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "codigospostalex.000webhostapp.com"
+          //"Port": 80
+        }
+      ]
+    },
+    {
       "UpstreamPathTemplate": "/gateway/categorias",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/Categorias",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7854
+          "Port": 7007
         }
       ]
     },
@@ -19,11 +31,23 @@
       "UpstreamPathTemplate": "/gateway/platillos",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/Platillos",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7854
+          "Port": 7007
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/platillos/{platilloId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Platillos/{platilloId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7007
         }
       ]
     },
@@ -31,16 +55,40 @@
       "UpstreamPathTemplate": "/gateway/platillos/{platilloId}/Imagen",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/Platillos/{platilloId}/Imagen",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7854
+          "Port": 7007
         }
       ]
     },
     {
-      "UpstreamPathTemplate": "/gateway/InicioDeSesion",
+      "UpstreamPathTemplate": "/gateway/tiendas",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Tiendas",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7007
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Clientes",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Clientes",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7096
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Clientes/InicioDeSesion",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamPathTemplate": "/api/Clientes/IniciarSesion",
       "DownstreamScheme": "https",
@@ -52,62 +100,19 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/gateway/clientes",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/Clientes",
+      "UpstreamPathTemplate": "/gateway/Pedidos",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Pedidos",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7096
+          "Port": 7056
         }
       ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer"
       }
     }
-    //{
-    //  "UpstreamPathTemplate": "/gateway/inicioDeSesion",
-    //  "UpstreamHttpMethod": [ "Post" ],
-    //  "DownstreamScheme": "http",
-    //  "DownstreamPathTemplate": "/WebUsuarios/api/Clientes/InicioDeSesion",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": 8013
-    //    }
-    //  ]
-    //} //,
-    //{
-    //  "UpstreamPathTemplate": "/gateway/pedidos",
-    //  "UpstreamHttpMethod": [ "Post" ],
-    //  "DownstreamScheme": "https",
-    //  "DownstreamPathTemplate": "/api/Pedidos",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": 7153
-    //    }
-    //  ],
-    //  "AuthenticationOptions": {
-    //    "AuthenticationProviderKey": "Bearer"
-    //    //,"AllowedScopes": []
-    //  }//,
-    //  //"RouteClaimsRequirement": {
-    //  //  "role": "Administrator"
-    //  //}
-    //}
-  ] //,
-  //"SwaggerEndPoints": [
-  //  {
-  //    "Key": "contacts",
-  //    "Config": [
-  //      {
-  //        "Name": "Contacts API",
-  //        "Version": "v1",
-  //        "Url": "http://localhost:5003/swagger/v1/swagger.json"
-  //      }
-  //    ]
-  //  }
-  //]
+  ]
 }

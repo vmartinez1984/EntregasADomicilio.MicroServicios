@@ -83,7 +83,7 @@ namespace EntregasADomicilio.Web.Pedidos.BusinessLayer
                     Nombre = platillo.Nombre,
                     Descripcion = platillo.Descripcion,
                     Precio = (double)item.Precio
-                }); ;
+                });
             }
 
             return platillos;

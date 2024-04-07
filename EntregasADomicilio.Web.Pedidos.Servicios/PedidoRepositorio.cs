@@ -28,14 +28,39 @@ namespace EntregasADomicilio.Web.Pedidos.Repositorios.Firestore
             return pedido.Id;
         }
 
-        public Task<Pedido> ObtenerPorIdAsync(string pedidoId)
+        public async Task<Pedido> ObtenerPorIdAsync(string pedidoId)
         {
-            throw new NotImplementedException();
+            Query query;
+            QuerySnapshot snapshots;
+            Pedido entity;
+
+            query = _firestoreDb.Collection(coleccion)
+                .Where(Filter.EqualTo(nameof(Pedido.Id), pedidoId));
+            snapshots = await query.GetSnapshotAsync();
+            if (snapshots.Count > 0)
+                entity = snapshots[0].ConvertTo<Pedido>();
+            else
+                entity = null;
+
+            return entity;
         }
 
-        public Task<List<Pedido>> ObtenerTodosPorClienteIdAsync(string clienteID)
+        public async Task<List<Pedido>> ObtenerTodosPorClienteIdAsync(string clienteID)
         {
-            throw new NotImplementedException();
+            Query query;
+            QuerySnapshot snapshots;
+            List<Pedido> list;
+
+            query = _firestoreDb.Collection(coleccion)
+                .Where(Filter.EqualTo(nameof(Pedido.Cliente.Id), clienteID));
+            snapshots = await query.GetSnapshotAsync();
+            list = new List<Pedido>();
+            foreach (var item in snapshots)
+            {
+                list.Add(item.ConvertTo<Pedido>()); 
+            }
+
+            return list;
         }
     }
 }

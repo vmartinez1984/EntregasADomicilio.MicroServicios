@@ -14,15 +14,23 @@ builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange
 builder.Services.AddOcelot(builder.Configuration);
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("*")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .WithExposedHeaders("*");
+    });
+});
+
 var app = builder.Build();
 
-
-//app.UseHttpsRedirection();
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-//app.MapControllers();
 
 await app.UseOcelot();
 

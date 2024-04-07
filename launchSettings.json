@@ -6,7 +6,8 @@
       "serviceActions": {
         "entregasadomicilio.usuarios.api": "StartDebugging",
         "entregasadomicilio.web.platillos.api.v2": "StartDebugging",
-        "entregasadomicilio.web.pedidos.api": "StartDebugging"
+        "entregasadomicilio.web.pedidos.api": "StartDebugging",
+        "entregasadomicilio.web.apigateway": "StartDebugging"
       }
     }
   }

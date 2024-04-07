@@ -37,12 +37,12 @@ namespace EntregasADomicilio.Web.Platillos.Api.V2.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        public async Task<IActionResult> Get(Guid id)
         {
             PlatilloDto platilloDto;
             Platillo c;
 
-            c = await _repositorio.Platillo.ObtenerPorIdAsync(id);
+            c = await _repositorio.Platillo.ObtenerPorIdAsync(id.ToString());
             platilloDto = new PlatilloDto
             {
                 Id = c.Id,

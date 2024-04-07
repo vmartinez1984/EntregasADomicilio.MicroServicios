@@ -51,7 +51,7 @@ namespace EntregasADomicilio.Usuarios.BusinessLayer.Bl
                         CodigoPostal = usuario.Cliente.Direccion.CodigoPostal,
                         Colonia = usuario.Cliente.Direccion.Colonia,
                         CoordenadasGps = usuario.Cliente.Direccion.CoordenadasGps,
-                        EsLaPrincipal = usuario.Cliente.Direccion.EsLaPrincipal,
+                        EsLaPrincipal = true,
                         Estado = usuario.Cliente.Direccion.Estado,
                         Id = Guid.NewGuid().ToString(),
                         Referencia = usuario.Cliente.Direccion.Referencia

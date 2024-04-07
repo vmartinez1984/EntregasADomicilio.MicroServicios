@@ -21,9 +21,6 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        //string frontEndUrl;
-
-        //colocar la url en una variable uqe se lea desde appsetiings
         builder.WithOrigins("*")
         .AllowAnyMethod()
         .AllowAnyHeader()
@@ -35,9 +32,9 @@ builder.Services.AddSwaggerGen(gen =>
 {
     gen.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Server API",
+        Title = "Pedidos Api",
         Version = "1.0",
-        Description = "This API features all public available endpoints showing different API features."
+        Description = "Api de pedidos para uso desde la página web o app mobile"
     });
 
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

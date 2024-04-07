@@ -20,7 +20,8 @@ namespace EntregasADomicilio.Web.Platillos.Api.V2.Controllers
         {
             List<CategoriaDto> categorias;
 
-            categorias = (await _repositorio.Categoria.ObtenerTodosAsync()).Select(c => new CategoriaDto
+            categorias = (await _repositorio.Categoria.ObtenerTodosAsync())
+            .Select(c => new CategoriaDto
             {
                 Id = c.Id,
                 Nombre = c.Nombre,

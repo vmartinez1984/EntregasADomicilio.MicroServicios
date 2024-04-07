@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: EntregasADomicilio.Web.Platillos.Api.V2/Dockerfile
+    ports:
+    - "6000:80"
 
   entregasadomicilio.web.pedidos.api:
     image: ${DOCKER_REGISTRY-}entregasadomiciliowebpedidosapi
@@ -20,3 +22,14 @@ services:
       context: .
       dockerfile: EntregasADomicilio.Usuarios.Api/Dockerfile
 
+
+  entregasadomicilio.web.apigateway:
+    image: ${DOCKER_REGISTRY-}entregasadomiciliowebapigateway
+    build:
+      context: .
+      dockerfile: EntregasADomicilio.Web.ApiGateway/Dockerfile
+    ports:
+    - "5000:5000"
+
+# docker-compose build
+# docker-compose up

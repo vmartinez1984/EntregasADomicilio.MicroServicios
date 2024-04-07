@@ -15,8 +15,4 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\EntregasADomicilio.Admin.WebData.Core\EntregasADomicilio.Core.csproj" />
-  </ItemGroup>
-
 </Project>

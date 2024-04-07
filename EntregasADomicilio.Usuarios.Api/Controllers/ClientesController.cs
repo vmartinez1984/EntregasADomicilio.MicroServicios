@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EntregasADomicilio.Usuarios.Api.Controllers
 {
+    /// <summary>
+    /// Api para la administración de clientes desde la pagína web o app mobile
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
@@ -13,29 +16,54 @@ namespace EntregasADomicilio.Usuarios.Api.Controllers
     {
         private readonly UnitOfWork _unitOfWork;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="unitOfWork"></param>
         public ClientesController(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Registrar nuevo usuario
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <response code="201">Usuario creado</response>
+        /// <response code="200">Usuario registrado anteriormente</response>
         [HttpPost]
         [AllowAnonymous]
+        [ProducesResponseType(typeof(IdDto), 201)]
+        [ProducesResponseType(typeof(ClienteDto), 200)]
         public async Task<IActionResult> AgregarAsync([FromBody] UsuarioDtoIn usuario)
         {
+            ClienteDto clienteDto;
+
+            clienteDto = await _unitOfWork.Cliente.ObtenerAsync(usuario.Id);
+            if(clienteDto is not null)
+                return Ok(clienteDto);
             await _unitOfWork.Cliente.AgregarAsync(usuario);
 
-            return Created("", new { Id = usuario.Id });
+            return Created("", new IdDto {  Id = usuario.Id });
         }
 
+        /// <summary>
+        /// Iniciar sesión
+        /// </summary>
+        /// <param name="inicioDeSesion"></param>
+        /// <response code="200">Token</response>
+        /// <response code="404">Contraseña y/o correo incorrectos</response>
         [HttpPost("IniciarSesion")]
         [AllowAnonymous]
+        [ProducesResponseType(typeof(TokenDto), 200)]
+        [ProducesResponseType(typeof(string), 404)]
         public async Task<IActionResult> IniciarSesion(InicioDeSesionDto inicioDeSesion)
         {
             TokenDto tokenDto;
 
             tokenDto = await _unitOfWork.Cliente.IniciarSesionAsync(inicioDeSesion);
             if (tokenDto == null)
-                return NotFound(new { Mensaje = "Contraseña y/o correno incorrectos" });
+                return NotFound(new { Mensaje = "Contraseña y/o correo incorrectos" });
 
             return Ok(tokenDto);
         }
